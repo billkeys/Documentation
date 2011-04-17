@@ -1,0 +1,134 @@
++----------------------------------------------------------------------------------
+|	SELinux cheat sheet
++------------------------------------------------------------------------------------
+
+  # sestatus  		<- Check if SELinux is enabled, etc.
+
+  # setenforce 1	<- Enables SELinux
+  
+  # touch /.autorelabel  <- Relabel at reboot
+
+
++ Labels
+  #chcon system_u:object_r:etc_t /etc/hosts /etc/hosts.allow	<- Labels
+
+  #chcon --reference=/etc/hosts /etc/hosts.allow /etc/hosts.deny	<- Labels using another file's secContext
+ 
+  #fixfiles restore						<- Relabels EVERYTHING
+
+  #restorecon [-n] [-v] /etc/hosts			<- Labels *one or more* "files" (src/policy/file_contexts/file_contexts)
+  #setfiles file_contexts/file_contexts /home/bill	<- Labels *one or more* "files or filesystems" (..file..)
+
+  #runcon -u system_u -r system_r -t crond_t /usr/sbin/crond	<- Run process under custom SecContext
+  #runcon    system_u:system_r:crond_t       /usr/sbin/crond
+
+  #newrole -r sysadm_r -t sysadm_t  			<- Entering a role
+
+-------------------------------------------------------------------------------------------------------------
+
++ ALLOWING RESTRICTIONS:
++---------------------
+If something is restricted we can see it in /var/log/messages*
+We can automatically generated a new rule to avoid that:   (we have to carefully analyze it before implementing it)
+
+ # audit2allow -i /var/log/messages -l
+ allow httpd_sys_script_t httpd_sys_script_ro_t:dir { write };
+
+We realize "allow" wont be secure in this case, we modify the policy like this:
+ dontaudit httpd_sys_script_t httpd_sys_script_ro_t:dir { write };. 
+
+
++ ADDING THE NEW POLICY:
++---------------------
+ We go to the "src/policy" dir:
+   # cd /etc/selinux/strict/src/policy
+ 
+ We create the .te and add the policy:
+  # echo "dontaudit httpd_sys_script_t httpd_sys_script_ro_t:dir { write };" > domains/misc/local.te
+
+ Compile them! ;)
+   # make reload
+
+
+
++ ADD USERS
++ --------------
+ >user hugoadmin roles {staff_r sysadm_r [system_r]};
+ >user bob roles {user_r};
+
+ ifdef(`user_canbe_sysadm',`sysadm_r system_r')
+ ifdef(`direct_sysadm_daemon',`system_r')
+
+#make load <- relabel
+
+BACKING UP:
+$ls -Z /var/log/maillog
+ -rw-------  root   root    system_u:object_r:var_log_t   /var/log/maillog
+$cd /var/log
+$star -xattr -H=exustar -c -f maillog.star ./maillog*
+
+
++ Debugging
++ ---------------------------------
+  dmesg -c
+  watch audit2allow -d
+
+
++ Listing current loaded modules
++ --------------------------------------------------------------------
+  semodule -l
+
++ Generating rules from logs
++ --------------------------------------------------------------------    
+  audit2allow -M local-fixes -d
+        
+  semodule -i localfixes.pp
+
+
++ Building and loading SELinux module
++ -------------------------------------------------------------------
+  vi localfixes.te           
+	    
+  checkmodule -M -m -o localfixes.mod localfixes.te
+   
+  semodule_package -o localfixes.pp -m localfixes.mod 
+       
+  semodule -i localfixes.pp 
+
++ Fixing SElinux problems
++ -------------------------------------------------------------------
+
+ + SELinux is all about labeling
+   - If files are stored in a location that is not the default then
+     those files need to have a different label
+
+   - Example Fix
+      semanage fcontext -a -t httpd_sys_content_t '/srv/myweb(/.*)?'
+
+   - Restore the label
+      restorecon -R /srv/myweb
+      matchpathcon /srv/myweb  // prints default label
+
+ + You have to tell SELinux about how a confined process is being run.
+
+   - if/then/else rules called booleans that allow you to tweak the predefined rules to allow different access
+
+   - Debug
+     setroubleshoot
+     audit2allow -w
+     audit2why
+
+   - List booleans
+     getsebool -a
+
+   - example
+      setsebool -P httpd_can_network_connect_db 1
+
+  + SELinux rules are evolving and applications are sometimes broken
+    - Generate a local policy module
+      grep postgresql /var/log/audit/audit.log | audit2allow -R -M mypostgresql
+      semodule -i mypostgresql.pp 
+
+   - report the SELinux errors to bugzilla or a mailing list so your local
+   modifications can be added to the distribution's policy or upstream.
+

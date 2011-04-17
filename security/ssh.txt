@@ -1,0 +1,5 @@
+
++ Disable password auth
+ http://www.linuxplanet.com/linuxplanet/tips/6592/1/
+ http://www.debian-administration.org/tag/ssh
+

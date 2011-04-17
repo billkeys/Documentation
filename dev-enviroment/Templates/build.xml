@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<project default="main">
+    <target name="main" depends="compile, compress" description="Main target">
+        <echo>
+            Building the .jar file.
+        </echo>
+    </target>
+  
+    <target name="compile" description="Compilation target">
+        <javac srcdir="./"/>
+    </target>
+  
+  <target name="compress" description="Compression target">
+        <jar jarfile="Hash.jar" basedir="./" includes="*.class" />
+  </target>
+</project>

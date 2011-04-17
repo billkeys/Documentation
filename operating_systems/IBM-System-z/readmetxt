@@ -1,0 +1,11 @@
+
++ Running hercules
++ -----------------------------
+ - note use the hercules conf from this directory ./hercules.cnf
+
+# hercules -f hercules.cnf
+
+
++ Resources 
++ -------------------------------------
+http://www.redbooks.ibm.com/redbooks/pdfs/sg246366.pdf

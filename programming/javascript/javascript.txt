@@ -1,0 +1,260 @@
++ ---------------------------------------+
+| Java Script				 |
++ ---------------------------------------+
+
++ Overall
++ ---------------------
+
++ Features of Client side JavaScript
+  - Control Document Appearence adn Content
+  - Control The browser
+  - Interact with HTML Forms
+  - Interact with the User - ie with Event Handlers
+  - Read and Write Client State with Cookies
++ What it can't do
+  - no graphics other then dynamically generating HMTL
+  - no reading or writing of file for security reasons
+  - no networking support like sockets
++ Other
+  - every iplment ation og JavaScript alwoys have a global object at the head
+    global properties ie fields or varibles
+
++ When to use javascript
+  - Event
+    click, double clicks, mouse enters mouse exits, key presses
+  - Browser access
+    window sizing 
+
++ Client Side JavaScript
++ -----------------------------------------------------------
+  + The web Browser Enviroment
+    - Features
+      1. Window Object - browser window, global object and global execution context
+                         Its at the root (window.document. ...) //current window document
+      2. DOM and client-side object hierarchy - represent the HTML Document
+      3. Event-driven programming model - never use document.write() because it will 
+                                          overide the current document with a new one
+  + Embedding Scripts int HMTL
+    1. JavaScript code between <script> </script>
+    2. external file specfied by the srv attribute of <script> tab
+    3. in an event handler as a value of an HMTL attrubure like onclick
+   4. In URL javascript: protocol
+
+  + Manipulating the Document During Loading
+    - When to do edit the Document with for exampe document.write() is a debate 
+      can depend on the browser
+    - Consensus that existing is it's safe to manipuate the document once the 
+     onload event has been triggered
+
++ Scripting HTTP (ie AJAX)
++ --------------------------------------------------
+  + Some ways of doing Scripting HTTP
+    - <img>, <iframe> <script> use the src property
+    - XMLHttpRequest Object which provides addess to HTTP protocol
+  + Using XMLHttpRequest
+    - XMLRequestion is not limited to just using xml document it 
+      can fetch any kind of text document
+    - Steps:
+      1. create XMLHttpRequest object
+         var request = new XMLHttpRequest();
+      2. specifying and submitting your HTTP request to the web server
+         request.open("GET", url, false); // POST or HEAD (gets info about doc) can be used
+         request.setRequestHeader(....
+         request.send(null);//use null if using GET if POST put what is send to the server
+      3. synchronously or asynchrously retrieving the server's responce  
+    
+    - Asynchronous Responce
+      request.open(...,true)
+      nottfication of a responce is handled by an event handler
+      event handler propery is onreadystatechange function which is called
+      when readyState is changed so we need to check readyState for it's value
+    - Notes
+      there is no standardized XMLHttpRequest Object so each browser does it a 
+      little diffent
+
+   + HTTP POST
+     - Overall
+       data is put in the body of HTTP rather then in GET in the URL
+       used when the request changes the state of the server
+     - How to 
+       HTTP.post();
+
+    + Ajaxs and Dynamic Scripting
+      - uses scripted HTTP to communitate with a web server without causing pages
+        to reload.
+      - XML is optional for encoding data
+      - hidden data might be better because you don't need make more request to 
+       the server then needed
+
++ HTML DOM
++ ---------------------------------------
+ - HTML Document Object Model (DOM) is the browser's view of an HTML page
+   as an object hierarchy, starting with the browser window itself and moving
+   deeper into the page, including all of the elements on the page and their attributes
+ 
+      Window
+        |
+     document
+        |
+   forms  anchors   images
+    |
+    textboxes,
+    radio buttons, etc
+
+ - JavaScript is used to manipulate or get information about objects in the HTML DOM.
+
+
++ JavaScript Syntax
++ ------------------------------------------------------------------
+  1. Statemens end with semi-colons  ;
+  2. case sensitive
+  3. comments
+     //
+     /*  */
+
+  4. objects reference using dot notation
+     window.document.loginform
+     window.document.forms[0]
+  5. objects reference using squar bracket notation
+     window['document']['loginform']
+     window['document']['form[0]']
+   
++ Where Javascript code written
++ ------------------------------------------------------
+  written inline ie withing HTML tags called event handlers in script blocks
+  Example.
+    JavaScript.html
+    <html>
+    <head>
+     <title>JavaScript Page</title>
+      <script type="text/javascript">
+        window.alert("The page is loading");
+       </script>
+    </head>
+    <body>
+      <p align="center">
+       <span onclick="document.bgColor = 'red';">Red</span> |
+       <span onclick="document.bgColor = 'white';">White</span>
+      </p>
+     <script type="text/javascript" src="Script.js"></script>
+    </body>
+    </html>     
+  
+  Script.js
+    document.write("Hello, there!");
+
+
++ Objects
+  - Objects have methods ( actions, opening a window)
+    window.alert()
+
+  - Proerties (attributes or qualities like color or size)
+    document.bgColor = 'red'
+  - implict window object
+    For example, 
+      window.document.write()  is equal to  document.write(). 
+      Likewise, window.alert() can be shortened to just alert().
+   
+   - The getElementById() Method
+      used to reference HTML elements by their ID use getElementById()
+   - Examples
+     Location - allows you to download and display the contents of any URL in any
+                window or frame of the browser
+     History  - allows you to move foward and back within the user;s browsing history
+     Window   -  allows JavaScript to display arbitray messages to the user in the 
+                 status line of any brower window 
+
++ Event Handlers
+  - Are attributes that force an element to "listen" 
+    for a specific event to occur.
+  - begin with the letters "on". 
+
+  - Example 
+    We used the onclick event handler to call JavaScript code that changed
+    the background color of the page
+
++ variables
+  var age;
+  age = 26;
+
++ Loosely typed Language
+   don't specify data types of a variable
+
++ Storing user entered data
+  <script type="text/javascript">
+    //Pop up a prompt
+    var USER_COLOR = window.prompt("Enter a color.", "");
+   </script>
+
+   <script type="text/javascript">
+     document.write(USER_COLOR);
+   </script>
+
+
++ arrays
+  var myarray = new Array();
+  //or 
+  var myarray = [];
+  // assignment
+  myarray[0] = value1;
+
+ //or 
+ var myarray = new Array(value1, value2, value3);
+ //or, using the [] notation:
+ var myarray = [value1, value2, value3]
+
+
++ Methods
+  
+   function changeBg(color){
+     return   document.bgColor = color;
+    }
+
++ Contitions and Loops
+ - If statment
+   if (age >= 21) {
+     alert("You can vote and drink!");
+   } else if (age >= 18) {
+     alert("You can vote, but can't drink.");
+   } else {
+      alert("You cannot vote or drink.");
+   }
+  
+ - switch/case 
+   var QUANTITY = 1;
+   
+   switch (QUANTITY) {
+     case 1 :
+       alert("QUANTITY is 1");
+     case 2 :
+       alert("QUANTITY is 2");
+       brea;
+     default :
+        alert("QUANTITY is not 1 or 2");
+      }
+
+ - while
+   while (conditions) {
+    statements;
+   }
+
+  - do while
+   do {
+     statements;
+   } while (conditions);
+
+  - for loop
+   for (initialization; conditions; change) {
+     statements;
+    }
+
+  - for in
+    for (var item in array) if (array.hasOwnProperty(item)) {
+     statements;
+    }
+
++ Resources
++ ----------------------------------------------------
+  http://www.learn-javascript-tutorial.com/
+  http://css-tricks.com/you-know-you-should-use-javascript-when/
+

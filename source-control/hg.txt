@@ -1,0 +1,55 @@
+
++ Creating an new project
++ ------------------------
+  hg init ssh://root@192.168.3.85//var/repos/new-test
+
++ getting a repos
++-------------------------------------
+ hg clone ssh://root@192.168.3.85//var/repos/Documentation
+
++ updating a local repos
++ -------------------------
+  hg pull -u
+
++ Revision History
++----------------
+
+You can view the repository revision history with:
+
+ hg history
+
+ hg -v history | less
+
+ hg [-v] log <filename>
+
+
++ Checking Changes
++-----------------
+ hg status
+ hg diff
+ hg commit
+
++Generating a patch
++------------------
+Diff between that changeset and its parent.
+
+   hg export [changeset]
+
+To generate a patch between two specified revisions use:
+   hg diff -r A -r B [files]
+
+
++ mercurial-queues 
++ -------------------
+ 
+ #cat ~/.hgrc
+ [extensions]
+  hgext.mq =
+
+  #hg help qinit 
+
++ Usefull link
++ -----------------------------
+
+  http://hgbook.red-bean.com/hgbookch12.html#x16-26700012
+  http://hgbook.red-bean.com/read/

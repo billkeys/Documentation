@@ -1,0 +1,8 @@
+
++ OpenGL Programming Guide
+  http://www.glprogramming.com/red/chapter01.html
+
++ code from the interactive computer graphics book
+
+ http://www.cs.unm.edu/~angel/BOOK/INTERACTIVE_COMPUTER_GRAPHICS/FOURTH_EDITION/PROGRAMS/
+

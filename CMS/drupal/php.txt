@@ -1,0 +1,9 @@
++ ---------------------------------------+
+| php					 |
++ ---------------------------------------+
+
+
++ Downgrading 
++ ---------------------------------------
+  http://www.nickveenhof.be/blog/reverting-or-downgrading-php-53-52-ubuntu-lucid-lynx-1004
+

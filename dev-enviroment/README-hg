@@ -1,0 +1,8 @@
+Adding a new project to the respos
+----------------------------------
+ hg init ssh://root@server1.inside//var/repos/dev-enviroment
+ hg clone ssh://root@server1.inside//var/repos/dev-enviroment
+ hg add .vimrc 
+ hg commit
+ hg push
+

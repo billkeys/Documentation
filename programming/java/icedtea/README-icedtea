@@ -1,0 +1,40 @@
++ Installing Iced tea on Fedora
++ -----------------------------
+
++ Installing depenences 
++ ----------------------
+
+  yum install /usr/bin/ecj mercurial cups-devel lesstif-devel libXp-devel libXtst-devel libXi-devel xalan-j2 xerces-j2 \
+libXt-devel libgcj freetype-devel gcc gcc-c++ wget java-1.5.0-gcj-devel alsa-lib-devel firefox-devel glib2-devel gtk2-devel \
+ant libXinerama-devel libjpeg-devel libpng-devel giflib-devel zlib-devel libjpeg-devel giflib-devel
+
+
++ other issues
++ ------------
+  - Needed to install rhino
+
+  - http://www.mozilla.org/rhino/download.html
+
+
++ Fixing known bugs
++ -----------------
+
+  wget http://download.fedora.redhat.com/pub/fedora/linux/releases/8/Everything/i386/os/Packages/java-1.5.0-gcj-1.5.0.0-17.fc8.i386.rpm
+ 
+  rpm -ihv java-1.5.0-gcj-1.5.0.0-17.fc8.i386.rpm --force
+
+  http://www.iced-tea.org/wiki/FedoraPerlBugAndWhatToDoAboutIt
+
+
++ Set-up
++ --------
+  hg clone http://icedtea.classpath.org/hg/icedtea6
+  cd icedtea6
+  autoreconf
+
++ Build 
++ -----------
+
+ ./configure
+  make
+

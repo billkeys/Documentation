@@ -1,0 +1,15 @@
+
++ Current setup
++ -------------------------------------------------
+ installed
+   potter.inside (monitoring kvm instances) 
+   test1.inside
+
++ Configuration
++ ------------------------------
+ vi /etc/powernap/config
+
++ Resources
++ -------------------------------------------
+http://blog.dustinkirkland.com/2009/07/introducing-powernap.html
+

@@ -1,0 +1,38 @@
+
++ Basic monitoring commands 
++ ----------------------------------
+  # vi /var/log/messages (system log)
+  # ps aux (running processes)
+  # netstat -anp (active connections)
+
++ Using nmap to scan networks
++ ---------------------------
+ nmap -sP 192.168.3.0/24
+
+
+
++ Using a perl script to scan networks
++ ------------------------------------
+#!/usr/bin/perl -w
+
+use strict;
+use Net::Ping;
+
+my $LAN = "192.168.3.";
+
+foreach my $octet (1 .. 255) {
+ my $pinger = Net::Ping->new();
+ if ( $pinger->ping( $LAN . $octet ) ) {
+	print  $LAN . $octet . "\n";
+ }
+ $pinger->close();
+}
+
++ smb
++ ----------------------------------------
+smbtree -d
+
++ resources
++ -----------------------------
+  - http://www.debian-administration.org/articles/54
+

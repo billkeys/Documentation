@@ -1,0 +1,30 @@
+
++ Local implementation
++ -----------------------------
+ http://localhost/nagios3/
+ username: nagiosadmin ?
+
+
++ configuration
++ ----------------------
+
+
++ Bugs 
++ ----------------
+ -  Can't get check_virt working with nrpe
+
+   potter.inside
+   /usr/lib/nagios/plugins/check_virt
+   /etc/nagios/nrpe.cfg
+  
+   sever1.inside 
+    root@server1:/etc/nagios3# ls -al virt-*
+     -rw-r--r--. 1 root root 2608 2010-01-14 14:53 virt-hosts.cfg
+     -rw-r--r--. 1 root root 4892 2010-01-14 16:00 virt-library.cfg
+    # pwd
+     /etc/nagios3
+
++ Resources
++ ---------------------------------------------
+ http://people.redhat.com/~rjones/nagios-virt/
+

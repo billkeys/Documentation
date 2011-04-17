@@ -1,0 +1,31 @@
++ ----------------------------------+ 
++ Things about the Ubuntu community |
++ -----------------------------------
+
+
++ What is done in the community
++ ------------------------------------
+ 1. Reporting
+ 2. Triage
+ 3. Analysis
+ 4. A: Forward  B: Fix locally
+ 5. Package fix
+ 6. Deploy fix
+
+Tips for doing bugs forwarding
+ - Do s query on bugs marked Confirmed or Triaged, Not Reported Upstream, and sort by most recently changed first
+ - make sure that the bug has been tested on the latest unstream code
+ - make sure launchpad bug includes all relevant information, including log files, backtraces, etc
+ - re-state the problem in 2-3 sentences up top in the bug report description
+ - URL back to the launchpad bug 
+ - launchpad bug, I click “Also affects project” and place the upstream bug URL there.
+ - Put a comment into the launchpad bug asking the reporter to subscribe to the 
+   upstream bug report, in case upstream has further questions or needs someone to test something.
+ - If upstream produces a patch, then the next step would be to grab the patch 
+  and attach it to the bug report. This flags step #5 to proceed.
+
++ Resources
++ ------------------------------------
+  https://wiki.ubuntu.com/PackagingGuide/Complete
+  http://www.windowsvistaplace.com/interview-with-bryce-harrington-ubuntu-xorg-maintainer/computing
+

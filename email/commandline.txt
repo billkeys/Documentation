@@ -1,0 +1,3 @@
++
++ Sending an attachment from the command line
+ mutt -a syslogs.tar.gz admin@domain.org < /dev/null

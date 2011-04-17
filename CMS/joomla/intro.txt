@@ -1,0 +1,36 @@
++ ---------------------------------------+
+| Overview of Joomla			 |
++ ---------------------------------------+
+
+
++ Model-View-Controller
++ ---------------------------------------
+
++ Model
+   provides funtions to manage and change data.
+   
++ View
+   displays the data by pulling the data from the model
+
++ Controllder
+  - responsible for responding to user actions
+  - examples
+    page request
+  - triggers methgs in the model and then pass the model into the view
+
++ Joomla
+   - JModel
+   - JView
+   - JController
+
++ Creating a Component
+  1. site/hello.php - this is the entry point to our component
+  2. site/controller.php - this file contains our base controller
+  3. site/views/hello/view.html.php - this file retrieves the necessary data and pushes it into the template
+  4. site/views/hello/tmpl/default.php - this is the template for our output
+  5. hello.xml - this is an XML (manifest) file that tells Joomla! how to install our component.
+
+  - Entry Point 
+
+   index.php?option=com_hello&view=hello
+

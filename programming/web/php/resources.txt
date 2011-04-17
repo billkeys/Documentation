@@ -1,0 +1,11 @@
++ ---------------------------------------+
+| Useful Resources for programming in PHP|
++ ---------------------------------------+
+
+
++ Manual 
+  http://www.php.net/manual/en/
+
++ Tutorials
+  http://www.w3schools.com/PHP
+

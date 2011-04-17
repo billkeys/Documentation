@@ -1,0 +1,17 @@
+
+
+
++ local enviroment
++ ---------------------------
+ build32.inside
+ build64.inside
+
++ example rebuilding a pacakge
++ --------------------------------
+ apt-get source bc
+ pbuilder build *.dsc
+ ls /var/cache/pbuilder/result/ 
+
++ Resources
++ --------------------------
+https://wiki.ubuntu.com/PbuilderHowto

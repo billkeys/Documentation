@@ -1,0 +1,25 @@
+
++ Setting a static ip
++ -----------------------------------------
+# cat /etc/sysconfig/network-scripts/ifcfg-eth0 
+
+ # Networking Interface
+ DEVICE=eth0
+ BOOTPROTO=none
+ BROADCAST=192.168.3.255
+ HWADDR=54:52:00:7A:DE:DB
+ IPADDR=192.168.3.76
+ BOOTPROTO=none
+ NETMASK=255.255.255.0
+ NETWORK=192.168.3.0
+ TYPE=Ethernet
+ GATEWAY=192.168.3.1
+ NM_CONTROLLED=yes
+ IPV6INIT=no
+ ONBOOT=yes
+ USERCTL=no
+ PREFIX=24
+ NAME="System eth0"
+ UUID=5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03
+ DNS1=192.168.3.85
+

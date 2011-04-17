@@ -1,0 +1,30 @@
++ ---------------------------------------+
+| Ubuntu Development   			 |
++ ---------------------------------------+
+
+
++ Source control
++ ---------------------------------------
+   sudo apt-get install bzr
+   ssh-keygen -t dsa
+   cat ~/.ssh/id_dsa.pub
+
+   Copy your public key, from the previous command, then go to Launchpad to edit your SSH key:
+   https://launchpad.net/~username/+editsshkeys
+
+   Paste the key into "Add an SSH key" then click "Import Public Key". You should be all set now!
+
+   + Pulling 
+     bzr pull lp:perlbot
+
+   bzr pull lp:perlbot
+
+
+
+ + Resources
+ + ------------------------------------------------------
+   - Ubunutu and source control
+      http://ubuntuforums.org/showthread.php?t=916132
+   
+   - Using bazaar with launchpad
+     http://doc.bazaar.canonical.com/latest/en/tutorials/using_bazaar_with_launchpad.html

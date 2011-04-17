@@ -1,0 +1,71 @@
+
++ Vmware
++ ---------------
+
+ + can't run kvm and vmware at the same time need to remove the module
+   - sudo rmmod kvm_intel  kvm
+   /var/lib/vmware/Virtual Machines/server1-ubuntu
+
+
++ Converting vmware to kvm
++ -----------------------
+
+ # /home/yzrider/virtual/virt-goodies-0.3/vmware2libvirt  -f ubuntu-desktop-64-3.vmx > java1.xml
+ 
+  # vi java.xml
+  --- java1.xml	2008-10-21 22:02:25.000000000 -0400
+  +++ java1.xml-org	2008-10-21 22:01:50.000000000 -0400
+  @@ -21,9 +21,9 @@
+  -    <interface type='bridge'>
+  +    <interface type='network'>
+         <mac address='00:0c:29:fd:90:24'/>
+  -      <source bridge='br0'/>
+  +      <source network='default'/>
+       </interface>
+
+ # virsh --connect qemu:///system define java1.xml
+ # virsh --connect qemu:///system list
+
+
++ Convert pysical machine to virtuala machine
++ -------------------------------------------
+  - boot off of live cd virt-p2v
+  - needed to use the xml from adove 
+    - Then change the path in file
+
+  # virsh -c qemu:///system start labtop.xml
+  # virsh -c qemu:///system start labtop
+  http://et.redhat.com/~rjones/virt-p2v/download.html
+
+
++ Cloning an guest
++ ---------------------------------------------
+
+ # virt-clone --connect qemu:///system -o ubuntu-server-template2 -n ubuntu-server-test1 -f /usb-drive/vm/ubuntu-server-test1.qcow2
+
+  # virsh --connect qemu:///system
+  virsh# start ubuntu-server-test1
+
+  - Note you may need to edit /etc/network/interface the eth0 - eth3
+    check less /var/log/messages
+
++ Useful tools and files
++ ----------------------------------------------------
+
+  sudo vim /ubuntu-vm-builder/templates/libvirt.tmpl
+  sudo vim /usr/share/ubuntu-vm-builder/templates/libvirt.tmpl
+  virt-manager -c qemu:///system
+  vi README-KVM
+  virt-manager -c qemu:///system
+
+  + useful tools
+   virt-*
+
+
++ Resources
++ ----------------------------------------
+   http://www.howtoforge.com/how-to-compile-virt-df-virt-top-virt-mem-virt-ctrl-on-debian-lenny
+
+  http://libguestfs.org/
+  http://et.redhat.com/~rjones/virt-df/
+

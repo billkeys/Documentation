@@ -1,0 +1,23 @@
+
++ Usefull tools
++ -------------------
+  testdisk  // useful when delete a partition and you want to resort it
+  partimage  // copys whole partition on a dying disk 
+
+  + windows
+   clamscan  //easy virus scanner
+   chkrootkit  // finds and removes rootkits
+   sleuthkit   // analysis filesystema dn browse hidden files
+
++ resources making a live cd
++ ------------------------------
+ - http://www.cherrysave.com/linux/build-your-own-custom-ubuntu-live-cd/
+
+ fixes:
+ - sudo mksquashfs edit extract-cd/casper/filesystem.squashfs
+
+ - sudo mkisofs -r -V "custom-ubuntu-9.10.iso" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o ../ubuntu-9.10-desktop-i386.iso .
+
++ Boot to pendrive
++ ------------------------------------
+  - use UNetbootin

@@ -1,0 +1,9 @@
++ ---------------------------------------+
+| Trac					 |
++ ---------------------------------------+
+
+
++ Resources
++ ---------------------------------------
+  http://trac.edgewall.org/wiki/TracUbuntuMultipleProjects
+  http://trac-hacks.org/wiki/GitPlugin

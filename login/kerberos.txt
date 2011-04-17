@@ -1,0 +1,85 @@
++ Setting up a kerbose server
+ ---------------------------
+ # apt-get install krb5-kdc krb5-admin-server
+ # kdb5_util create -s
+ # kadmin.local -q "addprinc admin/admin"
+ 
+ # kadmin.local -p admin/admin
+ kadmin.local: addprinc -randkey host/server.local.network
+ kadmin.local: addprinc [username]
+ [type password]
+ kadmin.local: addprinc -randkey host/workstation.local.network
+ kadmin.local: ktadd host/server.local.network
+ kadmin.local: quit
+
+ # su [username]
+ > echo [username]@[REALM] > ~/.k5login
+ > exit
+
+  sudo /etc/init.d/krb5-admin-server restart
+  kinit steve/admin
+
++ Adding a new user 
++ -------------------------
+  # kadmin.local
+   Authenticating as principal root/admin@INSIDE with password.
+   kadmin.local:  addprinc bill@INSIDE
+   WARNING: no policy specified for bill@INSIDE; defaulting to no policy
+   Enter password for principal "bill@INSIDE": 
+   Re-enter password for principal "bill@INSIDE": 
+   Principal "bill@INSIDE" created.
+   kadmin.local:  quit
+  
+  # /etc/init.d/krb5-admin-server restart
+   * Restarting Kerberos administrative servers kadmind
+
++ Seting up DNS
++ ------------------
+ - test it 
+   $ kinit [username]
+   $ klist
+
+
++ setting up workstations
++ ----------------------
+  - note realm is INSIDE 
+   # apt-get install krb5-user libpam-krb5 libpam-ccreds auth-client-config
+    dpkg-reconfigure krb5-config
+    
+  - test 
+   # kinit yzrider@INSIDE
+   # klist
+ 
+  - enable  
+   # auth-client-config -a -p kerberos_example
+
++ ssh 
++ ---------------------
+ vi /etc/ssh/sshd_config
+
+  KerberosAuthentication yes
+  #KerberosGetAFSToken no
+  #KerberosOrLocalPasswd yes
+  KerberosOrLocalPasswd no
+  KerberosTicketCleanup yes
+
++ Debugging
++ --------------
+  https://help.ubuntu.com/9.04/serverguide/C/kerberos.html
+  http://www.docs.hp.com/en/T1417-90006/ch04s02.html
+  http://research.imb.uq.edu.au/~l.rathbone/ldap/kerberos.shtml
+  
+  cd /var/krb5
+  rm principal* .k5.*
+
++ Resources
++ ---------------------
+  https://help.ubuntu.com/9.04/serverguide/C/kerberos.html
+  https://help.ubuntu.com/community/SingleSignOn
+  http://www.alittletooquiet.net/text/kerberos-on-ubuntu/
+
+
+- fedora
+  http://docs.fedoraproject.org/security-guide/f11/en-US/sect-Security_Guide-Kerberos-Configuring_a_Kerberos_5_Server.html
+
+

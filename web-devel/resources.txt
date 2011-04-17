@@ -1,0 +1,9 @@
+
+
++ Useful firefox plugins for web development
++ -----------------------------------------
+  - Window Resizer
+
+
+  - http://www.webdesignbooth.com/35-absolutely-useful-firefox-plugins-for-web-designers-and-developers/
+

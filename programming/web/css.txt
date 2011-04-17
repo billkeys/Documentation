@@ -1,0 +1,11 @@
++ ---------------------------------------+
+| Learning CSS				 |
++ ---------------------------------------+
+
+
++ class vs id
++ ---------------------------------------
+  + When to use id vs class?
+  Use IDs when there is only one occurence per page. Use classes when there are one or more occurences per page.
+
+

@@ -1,0 +1,14 @@
+
+
+http://www.thegeekstuff.com/2008/06/how-to-monitor-remote-linux-host-using-nagios-30/
+
+http://www.ubuntugeek.com/nagios-network-monitoring-system-setup-in-ubuntu.html
+
+
++ ack's
++ ------------
+ - make sure /usr/local/nagios/var/rw has the right permissions 7777
+ - apache maybe should run as nagios
+    - vi /etc/apache2/envvars
+
+

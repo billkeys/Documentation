@@ -1,0 +1,41 @@
++ ---------------------------------------+
+| LVM Cheat Sheet 			 |
++ ---------------------------------------+
+
+
++ Create a New Filesystem
++ ---------------------------------------
+  # pvcreate /dev/sdg1
+  # vgcreate ext_vg /dev/sdg1
+  # lvcreate -L 450G -n ext ext_vg
+  # mkfs.ext3 -m 0 /dev/ext_vg/ext
+
++ Show Status
++ ---------------------------------------
+  # pvdisplay
+  # vgdisplay
+  # lvdisplay
+  # pvs
+  # vgs
+  # lvs
+
+
++ Resize 
++ ---------------------------------------
+  # lvextend -L +200 /dev/ext_vg/ext
+  # resize2fs -p /dev/ext_vg/ext
+
+
++ Add Another Parition 
++ ---------------------------------------
+  # pvcreate /dev/sdb1
+  # vgextend ext_vg /dev/sdb1
+  # pvdisplay
+  # lvextend -l +63602 /dev/ext_vg/ext
+  # resize2fs /dev/ext_vg/ext
+
+
++ Other Useful Commands
++ --------------------------------
+  fdisk -l | grep Disk     // total size of the disk
+

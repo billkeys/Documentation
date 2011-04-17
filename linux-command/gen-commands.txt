@@ -1,0 +1,1 @@
+# last | egrep -v '^(root|rwm)'

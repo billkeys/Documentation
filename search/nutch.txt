@@ -1,0 +1,41 @@
+
+
++ Bug with tomcat and nutch
++ -------------
+ http://osdir.com/ml/nutch-user.lucene.apache.org/2009-07/msg00023.html
+ 
+ vi /etc/tomcat6/policy.d/04webapps.policy
+  
+  add:
+
+   grant {
+    // Attempt to get Nutch working
+               permission java.security.AllPermission;
+
+
++ Setup
++ -------------
+  JAVA_HOME=/usr/lib/jvm/java-6-sun
+
++ searching
++ --------------------------------
+  cd /root/nutch-1.0
+  bin/nutch org.apache.nutch.searcher.NutchBean wiki
+
++ crawling
++ --------------------------
+  cd /root/nutch-1.0
+  bin/nutch crawl urls -dir crawl -depth 4
+
++ Tomcat 
++ --------------
+  /var/lib/tomcat6/webapps/nutch-1.0/WEB-INF/classes/nutch-site.xml
+
+
+
++ Resources
++ ---------------
+  http://wiki.apache.org/nutch/Nutch0.9-Hadoop0.10-Tutorial
+  http://thewiki4opentech.org/index.php/Nutch
+  http://lucene.apache.org/nutch/tutorial8.html
+

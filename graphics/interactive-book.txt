@@ -1,0 +1,154 @@
++ Interactive Computer Graphics
++-----------------------------------------------------
+
++ Chapter 1
+  - A graphic system
+    1. Input devices
+    2. Processor - assign values to the pixels in the frame buffer
+    3. Memory
+    4. Frame buffer - where pixels stored in memory
+    5. Output devices - ie monitors or raster system takes pixels from the 
+       frame buffer and displays them as a point
+  - Objects and viewer and light
+  - Image Formation Models
+    + Single point light source
+    + Ray tracting and photon mapping
+    + radiosity
+  - * Synthetic camera model - goal is to create a computer image in a similar
+    way as a optical system
+    + Object is independent of the viewer so two separate functions
+    + compute the image using geometric calculations like in the pinhole camera
+    + avoids flipping the image (projection plane)
+    + size of the image (clipping rectangle or clipping window in the projection  plane.
+    + leads to pipeline architecture  
+  - 3D APIs
+    + synthetic-camera model used in OpenGL 
+      - Functions, Objects, A viewer, light sources, material proprieties
+    + Objects are usually defined by a set of vertices
+      - glBegin(), glVertex3f(), glEnd()
+    + Viewer - needs position, orientation , focal length, and film plane
+      - gluLookAt(),glPerspective()
+   - Sequence of Images
+     + Wireframe
+     + flat polygons
+     + shading
+     + surface texture
+   -  Modeling-Rendering Paradigm
+   - Pipeline Architectures
+     increase through of data
+
+
++ Chapter 2
+  - 3D representation
+      p = (x,y,z)
+
+      or 
+
+      p = [ x y z ]
+
+     vertext is a position in space
+
+     glvertex*( , , )
+
+   - OpenGL types
+     # define GLfloat  float
+     # define GLint   int
+  
+     - glflush() - ensure the points are displayed as soon as possible
+   
+  - device - indented graphic
+    The programmer does not need to know the coordinate system 
+  - Types of functions
+    1) primitive functions        2) attribute 
+    3) viewing functions          4) Transformation
+    5) Input			  6) control
+    7) Query
+
+  - OpenGl State machine
+    Parameters are persistent ie values remain unchanged until we explicity change them.
+  - Open GL libaries
+    1) GL  - main libary
+    2) GLU - simplifies view, common objects
+    3) GLUT - each window system has functions connecting it to openGL
+              for input from external devices
+	      - X Window ie linux system uses GLX
+	      - Windows called wgl
+	      - mac called agl
+	    - GLUT combinds them all so the programmer does not need to 
+	           rewrite code for each platform
+   - Primitives
+     1) Geometice primitives
+        glBegin()
+	   glvertex*()
+	glEnd()
+ 
+        objects like points line segments, polyline etc
+      2) image or raster primitives
+
+   - Polygons Basics
+     important to graphic 
+     must be simple convex and flat
+
+   - Attibutes
+     Any property that determines how a geomitric primtive is to be rendered
+     ex. color thickness etc
+
+     They can be stored in memory or just rendered to the screen
+
+   - Color
+     Basic Tenet of Three Color Theory states that we only need three colors
+     
+     RGB
+     
+     glColor3f(1.0,0.0,0.0)  // red, 3 means RGB and f means float
+
+     RGBA - 4 dimensions used for rendering fog and opacit or transparency
+
+
+   - Viewing
+      objects are independent of the scene
+      orthographic view is default in opengl
+       viewer    display
+        .  --->   .
+        .  --->   .
+   - Matrix mode
+     1) model view matrix
+     2) projection matrix
+
+   - Basic GLUT functions
+     int main(int argc, char** argv) {
+     glutInit(int *argcv, char **argv)  // the two args allow use to pass command line arguments similar to main
+
+     glutCreateWindow(char * title) // opens a window with a given title
+
+     // uses a single-buffered window and 24-bit (8 per channel) color */
+     glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
+     
+     glutInitWindowSize (250, 250); // set initial window size
+     glutInitWindowPosition (100, 100); // set window size
+     glutCreateWindow("My First Square"); /* window title */
+
+     glutDisplayFunc(display); /* register callback */
+     glutReshapeFunc(reshape); /* register callback */
+     glutMouseFunc (mouse);
+     glutKeyboardFunc (keyboard);
+     
+     glutMainLoop(); /* enter event loop */
+     }	   
+   - Aspect Ratio - is the ratio of the rectangle's width to its height
+     The aspectio ratio of the viewing rectangle ( g10rtho) must be the same 
+     as the aspect ratio of the window (glutInitWindowSize)
+   
+   - Viewpoint is a rectangular area of the display window
+     glViewport(GLint x, GLint y, GLsixei w, GLsizei h) // x y is the lower-left corner
+
+   - hidden-surface problem
+     images must be displayed accorden to how the viewer is viewing it.
+     possible solutions are:
+      visible-surface algoritms or hidden-surface-removal algorithm
+      z-buffer algorithms
+
+
++ Resources
++ ------------------------
+  http://www.cs.unm.edu/~angel/BOOK/INTERACTIVE_COMPUTER_GRAPHICS/FOURTH_EDITION/

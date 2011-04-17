@@ -1,0 +1,10 @@
+
++ spell checking
+  - To turn on spell checking
+    :setlocal spell spelllang=en_us
+
+  - To fix the misspelled word
+    press z=  on the word
+
++ Subsitution
+  :%s/test/subwith/g

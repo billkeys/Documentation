@@ -1,0 +1,9 @@
+
++ running node.js like a services
+ http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever
+
++ Book
+http://ofps.oreilly.com/titles/9781449398583/
+
++ web framework
+  http://geddyjs.org/

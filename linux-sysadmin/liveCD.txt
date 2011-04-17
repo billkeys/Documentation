@@ -1,0 +1,10 @@
++  chroot
++ ----------------------------------------
+
+  $ sudo mkdir /mnt/linux
+  $ sudo mount -t ext4 /dev/sda5 /mnt/linux/
+  $ sudo mount -t proc proc /mnt/linux/proc
+  $ sudo mount -t sysfs sys /mnt/linux/sys
+  $ sudo mount -o bind /dev /mnt/linux/dev
+  $ sudo chroot /mnt/linux
+  root@ubuntu:/# 

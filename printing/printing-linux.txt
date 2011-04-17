@@ -1,0 +1,17 @@
+
++ debugging
++ ----------
+ - lsusb
+ - lpstat -d  # will show the current default destination 
+ - $lpadmin -p "Hallway"  -E -v socket://192.168.1.203:9100
+ - $lpr -P Hallway  mozilla.ps
+
+ 
+
++ Resources
++ ---------------
+
+http://www.linuxprinting.org/~till/printing-tutorial/tut.html
+
+
+http://ubuntuforums.org/showthread.php?p=1831119

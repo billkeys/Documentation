@@ -1,0 +1,11 @@
+URxvt*background: #FFFFD2
+URxvt*foreground: #000000
+
+! run "fc-list" for a list of available fonts
+URxvt*font: Liberation Sans:size=12:style=Bold
+Urxvt*boldFont: Liberation Sans:size=12:style=Bold
+URxvt*scrollBar: False
+URxvt*scrollTtyOutput: False
+URxvt*scrollTtyKeypress: True
+URxvt*secondaryScroll: True
+URxvt*saveLines: 8000

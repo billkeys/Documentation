@@ -1,0 +1,86 @@
+
+
++ IP Masquerade configuration
++ ----------------------------
+
+/sbin/iptables -F
+/sbin/iptables -t nat -F
+/sbin/iptables -t mangle -F #ignore if you get an error here
+/sbin/iptables -X #deletes every non-builtin chain in the table
+
+/sbin/iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+/sbin/iptables -A INPUT -m state --state NEW -i ! eth0 -j ACCEPT
+# only if both of the above rules succeed, use
+/sbin/iptables -P INPUT DROP
+
+/sbin/iptables -A FORWARD -i eth0 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
+/sbin/iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
+
+# use this line if you have a static IP address from your ISP 
+# replace your static IP with x.x.x.x
+/sbin/iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to x.x.x.x
+
+# use this line only if you have dynamic IP address from your ISP
+/sbin/iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+/sbin/iptables -A FORWARD -i eth0 -o eth0 -j REJECT
+
+
++ Creating Startup script
++ -----------------------------------
+
+
+- # vi /etc/init.d/gateway
+
+#! /bin/sh
+
+# If no rules, do nothing.
+[ -f /etc/gateway.rules ] || exit 0
+
+case "$1" in
+    start)
+        echo -n "Turning on packet filtering:"
+
+    	/sbin/modprobe ip_masq_ftp #only if using ipchains
+    	/sbin/modprobe iptable_nat #only if using iptables
+    	/sbin/modprobe ipt_MASQUERADE #only if using iptables
+        /sbin/ipchains-restore < /etc/ipchains.rules || exit 1
+
+        echo 1 > /proc/sys/net/ipv4/ip_forward
+    	# for RedHat users, the above line is not needed if you have
+    	# FORWARD_IPV4=true in /etc/sysconfig/network file
+
+    	echo "1" > /proc/sys/net/ipv4/ip_dynaddr
+    	# the above option is for Dynamic IP users (DHCP,PPP or BOOTP)
+
+        echo "."
+        ;;
+    stop)
+        echo -n "Turning off packet filtering:"
+        echo 0 > /proc/sys/net/ipv4/ip_forward
+
+        /sbin/ipchains -F
+        /sbin/ipchains -X
+        /sbin/ipchains -P input ACCEPT
+        /sbin/ipchains -P output ACCEPT
+        /sbin/ipchains -P forward ACCEPT
+        echo "."
+        ;;
+    *)
+        echo "Usage: /etc/init.d/gateway {start|stop}"
+        exit 1
+        ;;
+esac
+
+exit 0
+
+bash# chmod 744 /etc/init.d/gateway
+
++ Setting up dhcp
++ -----------------
+  http://www.linuxtopia.org/online_books/system_administration_books/ubuntu_starter_guide/ch07s04.html
+
++ Setting up wireless access point
++ --------------------------------
+  http://www.wikihow.com/Convert-Linksys-WRT54G-to-Be-an-Access-Point
+

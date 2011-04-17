@@ -1,0 +1,128 @@
++ ---------------------------------------+
+| Learning JQuery			 |
++ ---------------------------------------+
+
+
++ Into
++ ---------------------------------------
+
+  + Jquery and DOM
+   Almost everything we do when using jQuery reads or manipulates the document object model (DOM), 
+   we need to make sure that we start adding events etc. as soon as the DOM is ready.
+
+   To do this, we register a ready event for the document.
+
+    $(document).ready(function() {
+      // do stuff when DOM is ready
+     });
+   This JQuery ready event checks the document and waits until it's ready to be manipulated,
+
+  + JQuery selector
+    - Selects all 'a' elements. $ is alias for class so it constructs a new JQuery object.
+      $("a")  
+    - click(..) binds a click event to all selected elements '<a ..>'
+      $("a").click(function{alert("Hello");}); 
+    
+    - Selecting Elements
+      Two ways of selecting elements
+      1. CSS and XPath passed as strings  (eg. $("div > ul a")).
+      2.  The second uses several methods of the jQuery object.
+   
+   - Example
+     Classic JavaScript
+       document.getElementById("orderedlist")
+
+     JQuery - not it will only add red class to the first element with id orderedlist
+        $(document).ready(function() {
+	   $("#orderedlist").addClass("red");
+	});
+     
+     Addd blue class to all li elements with id orderedlist
+       $("#orderedlist > li").addClass("blue");
+   
+     Hovering
+       $(document).ready(function() {
+          $("#orderedlist li:last").hover(function() {
+	       $(this).addClass("green");
+          },function(){
+	       $(this).removeClass("green"); 
+           });
+         });
+
++ call methods on DOM elements that are not covered by jQuery
+  - Example reseting all form values
+    Note that reset is not JQuery its a function of the form element
+
+     $(document).ready(function() {
+      // use this to reset several forms at once
+      $("#reset").click(function() {
+         $("form").each(function() {
+	    this.reset();
+	 });
+       });
+    });
+
+
+  - Also we select onlu certain elements from a group of similar or identical ones.
+    we use filter and not()
+
+    $(document).ready(function() {
+       $("li").not(":has(ul)").css("border", "1px solid black"); 
+        });
+
+
+   + AJAXS
+     see ajax/
+
++ Animation
++ ----------------------------------------------------------------------------------- 
+    + show() and hide()
+      http://api.jquery.com/hide/
+
+    + Create one or more plugin methods by extending the jQuery object, eg.:
+      jQuery.fn.foobar = function() {
+         // do something
+       };
+     Which will then be accessible by performing:
+
+      $(...).foobar();
+     
+     + Default settings
+       Create default settings that can be changed by the user, eg.:
+
+        jQuery.fn.foobar = function(options) {
+	   var settings = jQuery.extend({
+	     value: 5, name: "pete", bar: 655
+           }, options);
+        };
+	
+	You can then call the plugin without options, using the defaults:
+        $("...").foobar();
+
+        Or with some options:
+
+         $("...").foobar({ value: 123, bar: 9 });
+    
+     + other things
+       - overide a JQuery function in a plugin
+
++ Plugins
++ -----------------------------------------------------------------------------------
+   + Why create a plugin
+     Either to reuse it for yourself or your company, or to share it with the community. 
+
+
+
++ Why Use JQuery
++ ------------------------------------------------------------------------------------
+    + Benifieds of JQuery
+       -helps seperate html and JS 
+        JQuery 
+	 $(document).ready(function() {
+	    $("a").click(function() {
+	       alert("Hello world!");
+            });
+        });
+        JS
+	<a href="" onclick="alert('Hello world')">Link</a>
+      - a lot about making code shorter and therefore easier to read and maintain.

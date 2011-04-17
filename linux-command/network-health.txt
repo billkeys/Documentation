@@ -1,0 +1,8 @@
+
+
+netstat -s -p tcp
+traceroute hostname
+
+packet loss
+----------
+  ping www.google.com

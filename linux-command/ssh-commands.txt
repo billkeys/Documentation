@@ -1,0 +1,20 @@
+
+  $ ssh-keygen -t dsa  -C 'Bill Desktop Key (DSA)'
+  $ ssh-keygen -t rsa1 -C 'Bill Desktop Key (RSA1)'
+
+Enter a strong passphrase.  This should be a sentance with punctuation.
+
+Now setup ssh-agent
+
++ Using ssh-agent for passwordless login
++ ---------------------------------------
+
+  http://www.securityfocus.com/infocus/1812
+
+
++ Secure ssh
++ ----------------------------------------
+  http://www.cyberciti.biz/tips/linux-unix-bsd-openssh-server-best-practices.html
+
+  http://www.cyberciti.biz/faq/ssh-password-less-login-with-dsa-publickey-authentication/
+  http://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/

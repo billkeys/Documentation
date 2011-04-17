@@ -1,0 +1,24 @@
++ Basic command for using screen
++ --------------------------------------------
+
+* screen -ls : List your running screen sessions
+* screen -x : reattach to your screen session
+
+ 
+   Ctrl-A    ?   //to get help
+
+ + windows
+   Ctrl-A    c         // Create a new screen window
+   Ctrl-A    n         // Toggle through windows
+   Ctrl-A    p         // Previous windows
+   Ctrl-A    w         // View a list of windows
+   Ctrl-A    1         // move to window 1
+   Ctrl-A    SPACE     // Move to the next window
+  
+ + leaving 
+   Ctrl-A    K or exit  // to close a session
+   Ctrl-A    d          // detach window which leaves the process running 
+                            and closes the window
+
+ + logging
+    Ctrl-A   H     // creates a running log of the session

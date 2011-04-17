@@ -1,0 +1,5 @@
++ Ubuntu
++ -----------------
+/etc/nagios/nrpe.cf
+/etc/init.d/nagios-nrpe-server restart
+

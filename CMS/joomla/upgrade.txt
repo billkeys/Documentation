@@ -1,0 +1,38 @@
++ Upgrading Joomla 
++ -------------------------------------------------------------------------------------------
+
+  + Clone production site
+    cd /var/www/html
+    git clone joomal joomla-dev
+  + Get new version and commit to dev
+    cd joomal-dev
+    wget http://joomlacode.org/gf/download/frsrelease/12193/49780/Joomla_1.5.17-Stable-Full_Package.zip
+    unzip Joomla_1.5.17-Stable-Full_Package.zip 
+  
+    git status                     // Make sure to add any needed files
+    git commit -a -m "Joomla 1.5.17"
+  
+  + pull changes from joomla-dev to joomla
+    cd ../joomla
+    git pull ../joomla-dev
+  
+  + resolve conflicts
+    - look in conflicts in the files for lines <<<<     XXX  >>>>
+      <<<<<<<<<<<<<<<<<<<<<
+       Your code
+       =============
+        There code
+     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    - remove <<<<<<<<<< and make need changes
+    - git add resolvedFile
+    - git commit -a -m "fixed merge"
+
+
+
+
+
++ Resources
++ ------------------------------------
+  http://www.versioncontrolblog.com/2007/08/02/upgrading-drupal-52-with-git/
+
+   

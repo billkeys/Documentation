@@ -1,0 +1,3 @@
+
+stress --cpu 4 --io 3 --vm 1 --vm-bytes 700M --verbose
+

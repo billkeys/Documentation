@@ -1,0 +1,12 @@
++ ---------------------------------------+
+| Useful Resources			 |
++ ---------------------------------------+
+
+
++ Links
++ ---------------------------------------
+  
+  - Tools for building a custom distro
+    http://ceb.sourceforge.net/
+  -
+

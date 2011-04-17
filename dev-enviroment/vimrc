@@ -1,0 +1,12 @@
+syntax on
+set nocompatible
+set backspace=indent,eol,start
+set autoindent
+"setlocal spell spelllang=en_us"
+
+autocmd BufNewFile *.java		0r ~/Documentation/dev-enviroment/Templates/java.java
+autocmd BufNewFile *.cpp		0r ~/Documentation/dev-enviroment/Templates/cpp.cpp         
+autocmd BufNewFile *.cpp		0r ~/Documentation/dev-enviroment/Templates/Perl.pl         
+autocmd BufNewFile *.py			0r ~/Documentation/dev-enviroment/vim/python3.0.vim
+autocmd BufNewFile *.txt		0r ~/Documentation/dev-enviroment/Templates/txt.txt
+

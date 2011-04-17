@@ -1,0 +1,108 @@
+####################################################
+    #     HERCULES EMULATOR CONFIGURATION FILE         #
+    #     (Note: not all parameters are shown)         #
+    ####################################################
+
+
+    #
+    #   System parameters
+    #
+
+
+    ARCHMODE   ESA/390
+    OSTAILOR   OS/390
+    LOADPARM   0120....
+
+    CPUSERIAL  000611
+    CPUMODEL   3090
+    CPUVERID   FD
+    LPARNAME   HERCULES
+    MODEL      EMULATOR
+    PLANT      ZZ
+    MANUFACTURER HRC
+    MAINSIZE   64
+    XPNDSIZE   0
+    NUMCPU     1
+    NUMVEC     1
+    SYSEPOCH   1900
+    YROFFSET   -28
+    TZOFFSET   -0500
+
+    HTTPROOT  /usr/share/hercules/ 
+    HTTPPORT   8081 NOAUTH
+
+    CCKD       cache=8
+    SHRDPORT   3990
+
+    PANTITLE   "My own private MAINFRAME!"
+    PANRATE    FAST
+    LOGOPT     TIMESTAMP
+    CODEPAGE   default
+    CNSLPORT   3270
+    CONKPALV   (3,1,10)
+
+    HERCPRIO   0
+    TODPRIO    -20
+    DEVPRIO    8
+    CPUPRIO    15
+
+    TIMERINT   DEFAULT
+    TODDRAG    1.0
+    DEVTMAX    8
+
+    DIAG8CMD   disable
+    SHCMDOPT   disable
+
+    DEFSYM     TAPEDIR "$(HOME)/tapes"
+    MODPATH    /usr/local/hercules
+    LDMOD      dyncrypt
+
+    PGMPRDOS   restricted
+    ECPSVM     no
+    ASN_AND_LX_REUSE  disable
+
+    AUTO_SCSI_MOUNT      no
+    MOUNTED_TAPE_REINIT  allow
+
+    #INCLUDE    mydevs.cfg
+
+    IGNORE     INCLUDE_ERRORS
+    INCLUDE    optdevs.cfg
+
+    #
+    #   Device definitions
+    #
+
+    0009      3215-C  /
+
+    000A      1442    adrdmprs.rdr
+    000C      3505    jcl.txt     ascii  trunc
+    000D      3525    pch00d.txt  ascii
+    000E      1403    prt00e.txt
+
+    001F      3270    * 192.168.0.1
+    0200.4    3270    * 192.168.0.0  255.255.255.0
+    0220.8    3270    GROUP1  192.168.3.0  255.255.255.0
+    0228.8    3270    GROUP2
+    0230.16   3270
+
+    0120      3380    ${DASD_PATH=dasd/}mvsv5r.120
+    0121      3380    ${DASD_PATH=dasd/}mvsv5d.121
+    0122      3380    ${DASD_PATH=dasd/}mvswk1.122
+    0123      3380    192.168.3.95
+
+    0140      3370    dosres.140
+    0141      3370    syswk1.141
+    0300      3370    sysres.300
+
+    0400      CTCT    30880  192.168.3.2  30880  2048      
+    0401      CTCT    30881  192.168.3.2  30881  2048
+    0420.2    CTCI    192.168.3.1  192.168.3.2
+    0440.2    LCS     -n   /dev/net/tun   192.168.3.2
+
+    0580      3420    /dev/nst0   # SCSI  (Linux or Windows)
+    0582      3420    ickdsf.ipl
+    0583      3420    /cdrom/tapes/uaa196.tdf
+    0584-0587 3420    $(TAPEDIR)/volumes.$(CUU) maxsizeM=170 eotmargin=131072
+
+    0590      3480    /dev/nst0 --no-erg --blkid-32   # Quantum DLT SCSI

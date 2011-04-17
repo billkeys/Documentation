@@ -1,0 +1,543 @@
+                     
+           Department of Electrical Engineering & Computer Sciences
+                         Instructional Support Group
+
+
+/share/b/pub/mapreduce.help
+/share/b/pub/hadoop.help
+/share/b/pub/mpi.help
+/share/b/pub/icluster.help
+/share/b/pub/ccluster.help
+
+								Mar 17 2009
+
+CONTENTS
+	Computing Clusters for EECS Students
+	MapReduce and MPI
+
+	Icluster: How to Logon
+	Icluster: How to Run MapReduce via ssh shell
+	Icluster: How to Run Parallel Programs using Torque/Maui
+	ICluster: How to View the WEB Logs
+	Icluster: Reserving Time for a Class
+
+	Cloud Cluster: How to Get an Account
+	Cloud Cluster: How to Run MapReduce via ssh shell
+	Cloud Cluster: How to Run MapReduce via Eclipse plugin
+	Cloud Cluster: How to Install the MapReduce plugin at home
+	Cloud Cluster: How to Transfer Files
+	Cloud Cluster: How to View the WEB Logs
+	Cloud Cluster: Announcements and Scheduled Downtime 
+
+	Computing Clusters for EECS Researchers
+
+
+Computing Clusters for EECS Students
+------------------------------------
+  EECS Instruction supports 2 different clusters of computers for students 
+  to do coursework in parallel computing.  Our on-site cluster (Icluster)
+  is available to all students who have Instructional computer accounts.
+  The off-site cluster (Cloud Cluster) is available only to students in 
+  specific classes.  The clusters are:
+
+  "ICluster" (aka "Google/Intel Cluster"):
+
+	This is a cluster of 26 DELL computers in a water-cooled rack
+	in an EECS server room, managed by EECS technical support staff 
+	(inst@eecs.berkeley.edu).  It consists of 26 Intel/DELL 1950s 
+	(2 quad-core 2.33GHz Xeon, 8-GB RAM) running Debian Linux.  The 
+	computers were purchased from DELL in August 2007 with funds that
+	were donated to EECS by GOOGLE and INTEL.  We deployed it as an 
+	8-node cluster that was used by CS61A in Fall 2007 and expanded 
+	it to 26-nodes in January 2008.  Any EECS class could use it.  
+	Both MapReduce/HaDoop and MPI programming tools are available.
+
+  "Cloud Cluster" (aka "Google/IBM Cluster"):
+  
+	This is a remote facility managed by Google/IBM.  It consists of 
+	40 64-bit dual-core Opterons (80 cpus) running Redhat SELinux on 
+	a Xen virtual machine.  Google and IBM have donated access time 
+	to EECS students.  Google and IBM provide EECS with a limited set 
+	of "tokens" that we give to students in selected classes.  The 
+	students generate accounts on the cluster and use either "ssh" (or 
+	"putty") or a special Eclipse plugin to run jobs on the cluster.  
+	Only MapReduce/HaDoop is available.
+
+
+MapReduce and MPI
+-----------------
+  Two basic types of programming are done on these clusters:
+
+  1) Distributed processing of large input files.  The software for that is 
+     "MapReduce" (http://labs.google.com/papers/mapreduce.html).  MapReduce
+     uses a framework called HaDoop (http://lucene.apache.org/hadoop/) to 
+     manage the distributed processing over multiple computers (nodes).  
+  
+  2) Development and testing of MPI tools.  MPI (http://www.open-mpi.org) is 
+     a standardized API typically used for parallel and distributed computing.
+     MPI tools may include Intel performance tools, SUNs JDK, SBCL (Lisp), 
+     UPC (C), CAF (Fortran), Titanium (Java), CVS, SVN, Git (versioning), 
+     Stow, Python, Octave (scripting), Torque/Maui (batch scheduling).  They 
+     need batch scheduling with no contention for performance and timing tests.
+
+  HaDoop is still in development and does not yet provide batch scheduling, 
+  so it could interfere with the controlled environment that the MPI users
+  need for performance and timing tests.
+  
+  References:
+
+  http://code.google.com/edu/parallel/mapreduce-tutorial.html
+  http://www.alphaworks.ibm.com/tech/mapreducetools/
+  http://www.michael-noll.com/wiki/Writing_An_Hadoop_MapReduce_Program_In_Python
+  http://www.michael-noll.com/wiki/Running_Hadoop_On_Ubuntu_Linux_%28Single-Node_Cluster%29
+  http://www.michael-noll.com/wiki/Running_Hadoop_On_Ubuntu_Linux_%28Multi-Node_Cluster%29
+  Googling for "hadoop run map-reduce" reveals programming examples. 
+
+  http://radlab.cs.berkeley.edu/wiki/Berkeley_Hadoop_SIG
+  https://bspace.berkeley.edu/portal/site/ff98d738-1d6b-4cf4-876f-e15dda302f6f
+  http://www.nytimes.com/2009/03/17/technology/business-computing/17cloud.html
+
+  http://inews.berkeley.edu/articles/Spring2009/cloud-computing
+  http://www.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-28.pdf
+
+
+Icluster: How to Logon
+----------------------
+  Students with EECS Instructional computer accounts can use MapReduce on 
+  the multi-node Instructional cluster by logging into the job submission
+  server
+  
+	icluster.eecs.berkeley.edu
+   
+  using 'ssh' or 'putty' (see http://inst.eecs.berkeley.edu/connecting.html).
+
+  Use your Instructional UNIX login/password, as on cory.eecs.berkeley.edu.  
+  For information about getting an EECS Instructional computer account, see 
+  http://inst.eecs.berkeley.edu/new-users.html.
+
+
+Icluster: How to Run MapReduce via ssh shell
+--------------------------------------------
+  Here is a simple test of the map-reduce implementation on 
+  icluster.eecs.berkeley.edu:
+
+        #!/bin/bash -x
+        export HADOOP_HOME=/home/aa/projects/hadoop
+        export HADOOP_INSTALL=$HADOOP_HOME/hadoop
+        export HADOOP_EXAMPLES=$HADOOP_INSTALL/hadoop-*-examples.jar 
+        export HADOOP_CONF_DIR=$HADOOP_HOME/conf
+        export PATH=$HADOOP_INSTALL/bin:$PATH
+
+	hadoop fs -rmr gutenberg gutenberg-output
+	hadoop dfs -copyFromLocal $HADOOP_HOME/examples/gutenberg gutenberg
+	hadoop jar $HADOOP_EXAMPLES wordcount gutenberg gutenberg-output
+	hadoop dfs -ls gutenberg-output
+	hadoop dfs -cat gutenberg-output/part-00000
+
+  CS61A teaching staff are developing an Stk/Java interface to Hadoop/MapReduce 
+  so they can add related functions to the UCB Scheme programming language
+  (http://inst.eecs.berkeley.edu/cgi-bin/pub.cgi?file=scheme.help).  Please
+  see "Infusing Parallelism into Introductory Computer Science Curriculum using 
+  MapReduce" (http://www.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-34.html)
+  for the authors' technical report.
+
+
+Icluster: How to Run Parallel Programs using Torque/Maui
+--------------------------------------------------------
+
+  The ICluster runs the Torque Resource Manager and the Maui Cluster Scheduler:
+
+    http://www.clusterresources.com/pages/products/torque-resource-manager.php
+    http://www.clusterresources.com/pages/products/maui-cluster-scheduler.php
+
+  These are used to schedule programs that can run on multiple nodes of the 
+  cluster.  Please see http://www.millennium.berkeley.edu/docs/torque.html 
+  for commands and examples [thanks to Mike Howard].
+
+
+ICluster: How to View the WEB Logs
+----------------------------------
+
+  Here are WEB sites that may display statistics for the Icluster:
+
+  	http://monitor.millennium.berkeley.edu
+
+	http://icluster1.eecs.berkeley.edu:50030		[default Hadoop]
+	http://icluster1.eecs.berkeley.edu:50060		[default Hadoop]
+	http://icluster1.eecs.berkeley.edu:50070		[default Hadoop]
+
+	http://icluster1.eecs.berkeley.edu:25702		[CS61A Hadoop]
+	http://icluster1.eecs.berkeley.edu:44501		[CS61A Hadoop]
+	http://icluster1.eecs.berkeley.edu:44508		[CS61A Hadoop]
+
+	
+
+Icluster: Reserving Time for a Class
+------------------------------------
+  
+  These classes wish to reserve the Icluster for their exclusive use:
+
+	CS61A - week 13 of the semester
+	CS61C - week 15 of the semester
+
+  Instuctors should please contact inst@eecs.berekeley.edu if they wish
+  to assign projects involving parallelism on the Icluster.
+
+  Programs that do not use parallelism should not be run on the Icluster.
+  Please refer to http://inst.eecs.berkeley.edu/~inst/iesglabs.html for 
+  information about our other computers.
+
+
+
+Cloud Cluster: How to Get an Account
+------------------------------------
+
+  Google/IBM provides EECS with "tokens" that students use to request accounts
+  on the Cloud Cluster.   To get an account, students in specific classes are
+  authorized to check out a token from an EECS WEB site.
+
+  To get an account on the Cloud Cluster:
+
+  1) Login to http://inst.eecs.berkeley.edu/webacct/ using CalNet and select
+     "Request Cloud Cluster account".
+
+  2) Review the Usage Agreement.   A form with your "token" will be displayed.
+
+  3) Goto http://univsupport.hipods.ihost.com, select "Register".
+     This puts you on the "New User Registration" page.   
+     (Your browser must allow Javascript for this WEB site.)
+
+  4) Enter the token.  Request an account (a login name and password). 
+     There should be NO SPACES in the login name or password.
+
+     We'll refer to this login name as "$USER".  (Note: this login and 
+     password will let you login to http://univsupport.hipods.ihost.com to 
+     communicate in user forums.)
+
+  5) Within 10 minutes, that account will be enabled on the Cloud Cluster.
+
+  6) You can login to http://univsupport.hipods.ihost.com using that account
+     to read the documentation and notices and to submit a help ticket.
+
+  Now you can run programs on the Cloud Cluster either from your local
+  computer via the ssh proxy setup or via an Eclipse plugin (see below).
+
+  REMEMBER YOUR NEW LOGIN and PASSWORD.  Your one-time token (step 2) is 
+  now obsolete, and it would be difficult to re-discover the login name 
+  and passwords you created if you forget them.
+
+  NOTE: Your files on the Cloud Cluster are temporary.  They are not backed up
+  and could be purged at any time by the Cloud Cluster staff.   So keep a copy
+  of your programs and input data in a safe place.
+
+  Documentation about using the Google/IBM Virtual Infrastructure (Cloud
+  Cluster) is under http://64.88.164.203/documents/.
+  
+  
+Cloud Cluster: How to Run MapReduce via ssh shell
+-------------------------------------------------
+  To run Hadoop on the Cluster from the command line of your local computer, 
+  you will use ssh on your local computer to open a SOCKS proxy to the Cloud 
+  Cluster through its gateway.  
+     
+  1) Login to your local computer account, open a terminal window and type:
+
+	ssh -D 6789 -L 50128:127.0.0.1:50128 $USER@64.88.164.202
+
+     This sets up a SOCKS proxy (via the -D option) on port 6789 for use 
+     connecting your local hadoop installation to the cluster.  The -L 
+     option connects your computer to a remote proxy allowing you to browse 
+     the remote Hadoop web interfaces.  
+     
+     Be sure to run this ssh command before you use the cluster.  Keep this 
+     ssh connection open for as long as you are using the cluster.  
+
+  2) You also need the "hadoop-site.xml" file for the Cloud Cluster.  That 
+     is already available in on the Instructional UNIX computers, but you 
+     would have to install if you are using your own computer, from
+     http://64.88.164.203/media/portal/sitexmls/1/3/oitdC6/hadoop-site.xml 
+
+     The local "hadoop" command determines where to run map-reduce from the
+     contents of the local "hadoop-site.xml" file.
+
+  3) In your local computer account, open a new terminal window to run 
+     hadoop commands.  To run a basic hadoop application on the Cloud
+     Cluster:
+
+	/bin/bash
+	export HADOOP_HOME=/home/aa/projects/hadoop
+	export HADOOP=$HADOOP_HOME/hadoop
+	export HADOOP_EXAMPLES=$HADOOP/hadoop-*-examples.jar
+	export HADOOP_CONF_DIR=$HADOOP_HOME/ccluster-conf
+	export PATH=$HADOOP/bin:$PATH
+
+	cd $HADOOP/bin
+	hadoop jar hadoop-*-examples.jar pi 50 100000
+
+     This will start a job that uses the computing power of the entire 
+     cluster to calculate pi.  Hopefully the value will be close to 3.14!
+
+  4) Here is an example of how to upload an input file ("gutenberg") to the
+     Cloud Cluster and run map-reduce on it:
+     
+	export GUTENBERG=$HADOOP_HOME/examples/gutenberg
+	cd $HADOOP/bin
+
+	hadoop dfs -rmr gutenberg gutenberg-output	# delete old files
+	hadoop dfs -put $GUTENBERG gutenberg		# install input file
+	hadoop dfs -lsr					# list the files
+
+	# generate lists of wordcounts
+	hadoop jar $HADOOP_EXAMPLES wordcount gutenberg gutenberg-output
+	hadoop dfs -lsr gutenberg-output		# list the files
+	hadoop dfs -cat gutenberg-output/part-00000	# display the output
+
+	# search for the text string "Warranty" 
+	hadoop dfs -mkdir input output
+	hadoop jar $HADOOP_EXAMPLES grep input output 'Warranty'
+	hadoop dfs -cat output/*			# display the output
+
+  The 'hadoop' command without arguments gives usage information.  
+
+  Other examples that might help you write Hadoop applications are in the
+  java package org.apache.hadoop.examples.  You can download the Hadoop 
+  source doop dfs -cat output/*code from http://hadoop.apache.org/core/version_control.html and 
+  looking at how these example applications were written.  
+
+
+Cloud Cluster: How to Run MapReduce via Eclipse plugin
+------------------------------------------------------
+
+  ***********************************************************************
+  *** March 2009: see http://64.88.164.203/documents/2/ for current 
+  *** instructions.  The Eclipse plugin below are from Spring 2008 
+  *** and will be updated soon.
+  ***********************************************************************
+  
+  IBM has written an Eclipse plugin called "MapReduce" that facilitates the 
+  use of Hadoop through the Eclipse IDE.  
+
+  The "MapReduce" plugin is installed in Eclipse on the Instructional Solaris 
+  (UNIX) computers (for hostnames, see http://inst.eecs.berkeley.edu/labs).
+
+  To use the MapReduce plugin on an Instructional computer:
+  
+  1) Start "eclipse33" and select Window->Open Perspective->Other->Mapreduce.
+     You should see a new tab called "MapReduce Servers" in the Eclipse window.
+
+  2) Create a new MapReduce project, package and classes:
+
+     Select File->New->Project->"MapReduce Project".  Enter a project name,
+     select "Use default Hadoop" and configure the Hadoop install directory
+     to be "/home/aa/projects/hadoop/hadoop-0.14.3".
+
+     Select File->New->Package.  Enter the project name and a new package name.
+
+     Select File->New->Class.  Create classes for Mapper, Reducer and Driver.
+  
+  3) To set up your connection to the Cloud Cluster, right-click on your 
+     Driver class, select "Run As"->"Run on Hadoop" and enter:
+
+	Server name: Hadoop Server
+	Hostname: 10.1.130.119
+	Installation directory: /hadoop/hadoop-0.16.0
+	Username: [your Cloud Cluster login]
+
+	Tunnel Connections (y/n) y
+	Tunnel via: 64.88.164.202
+	Tunnel username: [your Cloud Cluster login]
+     
+     Test with "Validate Location" (enter the password to the gateway, then
+     at the job submission server ("localhost:35044").   Look for the "Found
+     Hadoop" message at the top of the window.   
+
+  4) Now when you call Mapper, Reducer and Driver functions in your code, 
+     they can be run on the Cloud Cluster.
+
+  5) You can find help by selecting Help->Cheat Sheets->MapReduce 
+     and at http://www.alphaworks.ibm.com/tech/mapreducetools/
+
+  You can create Mappers, Reducers, and Drivers with coding templates.  You 
+  can also send created applications to be run on the Hadoop cluster, by 
+  providing the clusters network information, and you can also track the 
+  progress of your jobs in real-time.  See the cheat sheets included with 
+  the plugin for more details.
+
+  The University of Maryland is developing a MapReduce library for Hadoop 
+  called Cloud9.  It is available from 
+  http://www.umiacs.umd.edu/~jimmylin/cloud9/umd-hadoop-dist/cloud9-docs/.
+
+  If you're using Java 1.6, you must change your compiler compliance level 
+  5.0 or else your code will not run on the IBM cluster.  [Thanks to Jimmy 
+  Lin at University of Maryland for this info.]  You can do that by changing 
+  the 'Compiler compliance level' to "5.0" in one or more of these places in 
+  Eclipse, depending on the version of Eclipse:
+
+	Window -> Preferences -> Java -> Compiler
+	Eclipse -> Preferences -> Java -> Compiler
+	Projects -> Properties -> Java Compiler
+
+
+Cloud Cluster: How to Install the MapReduce plugin at home
+----------------------------------------------------------
+
+  ***********************************************************************
+  *** March 2009: see http://64.88.164.203/documents/2/ for current 
+  *** instructions.  The Eclipse plugin below are from Spring 2008 
+  *** and will be updated soon.
+  ***********************************************************************
+  
+  To connect to the Cloud Cluster, you need your own copy of Hadoop, and
+  replace the default "hadoop-site.xml" file with this one for the Cloud 
+  Cluster:
+
+	http://64.88.164.203/media/portal/sitexmls/1/3/oitdC6/hadoop-site.xml 
+
+  This will point your local hadoop installation to your cluster through
+  a SOCKS proxy.  You only need to do this the first time you use the Cloud 
+  Cluster.
+
+  To install the "MapReduce" plugin on your own computer:
+
+  0) If you don't have Eclipse 3.2+ (http://www.eclipse.org/) and Java 1.5+ 
+     (http://java.sun.com/), install those.
+
+  1) Download the MapReduce plugin from
+     http://inst.eecs.berkeley.edu/~hadoop/hadoop-eclipse-plugin.jar
+
+     OR
+
+     Download Hadoop 0.14.4 or later from 
+     http://www.apache.org/dist/hadoop/core/stable/  
+     Open the tar.gz archive and extract the hadoop-eclipse-plugin.jar file 
+     from the contrib directory.  (On UNIX, you can unbundle the *.gz file
+     using 'gunzip' and 'tar'.  On Windows, you can use http://7-zip.org.)
+     
+  2) If you are interested in running hadoop applications with scripts written
+     in non-Java languages, get hadoop-streaming.jar from the same directory.
+
+  3) Place the eclipse plugin jar file in the plugins directory off your 
+     Eclipse home directory.  The plugin requires Java 1.5+ and Eclipse 3.2+.  
+ 
+  4) To load the Eclipse plugin, start Eclipse with the -clean option.  
+     You should now have a MapReduce perspective available.  
+   
+  4) Follow the instructions above to set up your connection to the Cloud 
+     Cluster.
+
+  5) You can find help by selecting Help->Cheat Sheets->MapReduce.
+
+
+Cloud Cluster: How to Transfer Files
+------------------------------------
+  NOTE: Your files on the Cloud Cluster are temporary.  They are not backed up
+  and could be purged at any time by the Cloud Cluster staff.   So keep a copy
+  of your programs and input data in a safe place.
+
+  To access your files on the Cloud Cluster submission computer (10.1.130.117),
+  you have to login from the gateway computer (64.88.164.202) and then login
+  to 10.1.130.117.  To avoid 2 logins, you can set up a tunnel from your 
+  computer and use it to login and transfer files to the Cluster.
+
+  Assuming you are logged onto an EECS UNIX computer, these are commands 
+  that set up a tunnel through 64.88.164.202 to 10.1.130.117;
+
+  	set PORT1 = `echo "$$ + 1024" | bc`
+  	set PORT2 = `echo "$$ + 1025" | bc`
+	echo $PORT1 $PORT2
+	ssh -L ${PORT1}:10.1.130.119:22 -n -N $USER@64.88.164.202
+	CNTL/Z
+	bg
+
+  (Note, in this simple example we don't check for ports that are already in
+  use, so if you get an error just try any new random numbers above 1024.)
+
+  Enter your password, then put the ssh command in the background by typing
+  the CONTROL and Z keys (both the same time) and then "bg".  You can regain 
+  access to this command later and kill it by typing "fg" and "CONTROL/C".
+
+	ssh -D $PORT2 localhost -p $PORT1		# logs you in
+
+  Enter your password, and you will find yourself logged directly onto the
+  submission system (the name has "XenHost" in it) from the EECS computer.
+
+  On the EECS UNIX computer, these commands will now transfer files:
+
+	scp -P $PORT1 yourfile $USER@localhost:		# copy to the Cluster
+	scp -P $PORT1 $USER@localhost:yourfile .	# copy from the Cluster
+
+  The "$$ + 1024" part creates a random port number based on your current 
+  process id ($$).  You need 2 port numbers above 1024 that nobody else on
+  the computer (pulsar.eecs in this example) is using.  So if you get the 
+  error "bind: Address already in use..." then add one to the port number 
+  and try again.  Or, type "fg" again to see if you have left previous ssh
+  processes running with the port in the background.
+
+
+Cloud Cluster: How to View the WEB Logs
+---------------------------------------
+  Hadoop has a web interface running on the cluster master (10.1.130.117).  
+  However, due to security, the cluster master machine is not accessible 
+  from the Internet, which leads to problems using the interface.  In order 
+  to access this interface, which contains logs for each individual node, 
+  you need to set up an SSH tunnel and a SOCKS proxy.
+
+  1) First, open a tunnel to the cluster submission computer (10.1.130.119):
+
+  	set PORT1 = `echo "$$ + 1024" | bc`; 
+  	set PORT2 = `echo "$$ + 1025" | bc`
+	echo $PORT1 $PORT2
+	ssh -n -N -L ${PORT1}:10.1.130.119:22 $USER@64.88.164.202
+	CNTL/Z
+	bg
+
+	ssh -n -N -D $PORT2 localhost -p $PORT1
+	CNTL/Z
+	bg
+
+  2) Then, start your browser and edit proxy preferences to create a SOCKS 4.0 
+     proxy (not SOCK 5.0) on "localhost" using port $PORT2 (using the value 
+     for $PORT2 that you created above).
+
+  3) Then enter one of these addresses in your browser
+     
+	http://10.1.130.117:50030		# JobTracker
+	http://10.1.130.117:50060		# TaskTracker
+	http://10.1.130.117:50070		# HDFS Info
+
+     and you have full access to all the logs.  (You can use the Firefox 
+     SwitchProxy extension to easily switch between browsing via the proxy 
+     and normal proxyless browsing.) 
+
+
+Cloud Cluster: Announcements and Scheduled Downtime 
+---------------------------------------------------
+  Starting May 1 2008, you can logon to http://univsupport.hipods.ihost.com
+  to read announcements and forums about the Cloud Cluster.
+
+  The Google/IBM Cloud Cluster will be down for scheduled maintenance every
+  Monday starting at 2pm.
+
+
+Computing Clusters for EECS Researchers
+---------------------------------------
+  The Millennium project (http://www.millennium.berkeley.edu/) provides 
+  clusters for EECS researchers.  
+
+  The Cal-Grid cluster (http://ist.berkeley.edu/is/platforms/unix/calgrid/) 
+  is available to researchers on a recharge basis.  It is supported by the 
+  UC Berkeley IST group (servicedesk@berkeley.edu).  For more information,
+  also see http://inews.berkeley.edu/articles/Fall2008/computing-cluster
+  and http://scs.lbl.gov/.
+
+  The Amazon EC2 Elastic Compute Cloud (http://aws.amazon.com/ec2) is a WEB
+  interface to a virtual computing environment.  Costs range from:
+    $0.10/hr to $0.80/hr for compute time plus 
+    $0.10/GB to $0.18/GB for data transfer to and from the EC2.
+
+
+						EECS Instructional Support
+						378/384/386 Cory, 333 Soda
+						inst@eecs.berkeley.edu
+
+

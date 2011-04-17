@@ -1,0 +1,28 @@
++ Phase 1.0
++ --------------------------------------
+  
+  + Platform for writing disturbutive programs 
+   - Hadoop
+     shuttle
+     mac mini 
+   - Hadoop Distributed File System
+   - map reduce
+
+  + Searching / indexing
+    
+
+
++ Phase 2.0
++ --------------------------------------
+
+  + virtualization cluster
+    openNebula 
+    Eucalyptus ? https://localhost:8443/ (username  admin p: k2hidden)
+
+
++ Phase 3.0 (Security)
++ -----------------------------------------------------------------
+
+  + Security
+
+

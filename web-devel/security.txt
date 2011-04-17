@@ -1,0 +1,8 @@
+
+
+
++ Common Security Mistakes in Web Applications
+  1. Cross-site scripting (XSS)
+
+    http://www.smashingmagazine.com/2010/10/18/common-security-mistakes-in-web-applications/
+

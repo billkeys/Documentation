@@ -1,0 +1,132 @@
++ Summary
++ --------
+  - This document is used for building and testing the latest openjdk code.
+  - Note this install only have been testing on Ubuntu hardy
+
+
++ Getting the latest openjdk7
++ ---------------------------
+
+ find / -mount -name hgext
+ hg clone http://hg.akoha.org/hgforest/
+ cp hgforest/forest.py /usr/lib/python2.4/site-packages/hgext/
+
+ [root@blake ~]# cat ~/.hgrc
+  [ui]
+  username = root <yzrider@gmail.com>
+
+  [extensions]
+  hgext.mq =
+  hgext.forest=
+
+  hg fclone http://hg.openjdk.java.net/jdk7/jdk7
+
+
+
+
++ Installing the needed packages
++ --------------------------------
+   2  apt-get -y install build-essential make ruby ri g++
+   3  apt-get -y install x-dev libx11-dev
+   6  apt-get -y install bison
+   7  apt-get -y install python-dev
+   38  apt-get -y install alien fakeroot
+   39  sudo apt-get -y install exuberant-ctags iamerican
+   40  apt-get -y install wireshark
+   41  apt-get -y install manpages-dev glibc-doc
+   43  apt-get -y install sun-java6-jdk
+   87  apt-get install gawk
+   89  apt-get install ant
+   91  apt-get install findbugs
+   92  apt-get install findbug
+   93  apt-get install sh
+  120  apt-get install gmake
+  132  apt-get install findbugs
+  133  apt-get search findbugs
+  134  apt-cache  search findbugs 
+  277  apt-get install ketchup
+  308  apt-get install kernel-package libncurses5-dev fakeroot wget bzip2
+  316  apt-get install #
+  317  apt-get install gawk m4 libasound2 libcupsys2-dev sun-java6-jdk xlibs-dev x11proto-print-dev libxaw7-dev libxp-dev ibfreetype6-dev
+  321  apt-get install x11proto-print-dev libxaw7-dev libxp-dev ibfreetype6-dev
+  322  apt-get install x11proto-print-dev libxaw7-dev libxp-dev ibfreetype6-dev
+  323  apt-get install x11proto-print-dev libxaw7-dev
+  324  apt-get install x11proto-print-dev libxaw7-dev libxp-dev ibfreetype6-dev
+  325  apt-get install x11proto-print-dev libxaw7-dev libxp-dev 
+  327  apt-get install libfreetype6-dev
+  328  apt-get install xlibs-dev
+  329  apt-get install x11proto-print-dev
+  330  apt-get install libcupsys2-dev
+  331  apt-get install libasound2-dev
+  332  apt-get install m4
+  333  apt-get install build-essential
+  334  apt-get install libfreetype6-dev
+  335  apt-get install ibxaw7-dev
+  336  apt-get install libxaw7-dev
+  391  apt-get install binutils
+  392  apt-get install freetype
+  397  apt-get install libxtst
+  398  apt-get install Xtest
+  399  apt-get install xlibs-dev
+  401  apt-get install libxtst-dev
+  402  apt-get install libxtst6
+  404  apt-get install xorg-libs libXi
+  405  apt-get install libXi
+  406  apt-get install libX11-devel
+  407  apt-get install libxi-dev
+
++ Install find bugs
++ -----------------
+  wget http://internap.dl.sourceforge.net/sourceforge/findbugs/findbugs-1.3.5-rc1.tar.gz
+  tar -xvf findbugs-1.3.5-rc1.tar.gz 
+  cd findbugs-1.3.5-rc1
+  export FINDBUGS_HOME=/root/java-test/jdk7/findbugs-1.3.5-rc1
+  /root/java-test/jdk7/findbugs-1.3.5-rc1
+
+
++
++ Intall the jdk-7-ea-plug 
+--------------------------
+ # ssh -X root@java1.inside
+ # wget http://www.java.net/download/openjdk/jdk7/promoted/b34/jdk-7-ea-plug-b34-linux-x64-28_aug_2008.jar
+ # java -jar jdk-7-ea-plug-b34-linux-x64-28_aug_2008.jar
+
+
++ Setting up the eviromental varibles
++ -----------------------------------
+  export ALT_BOOTDIR=/usr/lib/jvm/java-6-sun-1.6.0.06
+  export ALT_BINARY_PLUGS_PATH=/root/java-test/plugin/openjdk-binary-plugs
+  export ANT_HOME=/usr/share/ant
+  export LANG=C
+  export FINDBUGS_HOME=/root/java-test/jdk7/findbugs-1.3.5-rc1
+
++ Doing the build
++ ----------------
+   make sanity
+   make
+
++ 2007 build blog entry
++ -----------------------
+  http://blogs.sun.com/navi/entry/openjdk_mercurial_repositories_are_open
+  http://blogs.sun.com/rajendrag/entry/building_openjdk_with_new_nio
+
++ html man page
++ ---------------
+  http://hg.openjdk.java.net/jdk7/build/raw-file/tip/README-builds.html
+
+
++ Search term
++-------------
+  sets to build openjdk on ubuntu jdk7
+
++ How to contribute
++ -----------------
+ https://jdk7.dev.java.net/collaborate.html
+
+
+Might me used full
+-------------------
+ http://today.java.net/pub/a/today/2007/11/29/building-the-jdk.html
+
+
+

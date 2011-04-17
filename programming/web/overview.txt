@@ -1,0 +1,73 @@
++
++ Overview of Web Programming 
++ ------------------------------------------------------------
+
+<<<<<<< HEAD
++ HTTP
+  All the header information like server type (ie Apache) is sent before the html is sent 
+
+
++ DOM
+=======
++ DOM - is an API that allows programs to access and update the content, structure, and style of a document.
+
+>>>>>>> 726167d68ae88d894b8605c6b4ee39d72fbada5e
+  - What is DOM?
+    The Document Object Model is a platform- and language-neutral interface that 
+    will allow programs and scripts to dynamically access and update the content,
+    structure and style of documents. The document can be further processed and 
+    the results of that processing can be incorporated back into the presented page.
+    The Documement can be HTML, XHTML, or XML
+
+ - DOM Level 3
+   DOM Level 3 specifies content models (DTD and Schemas) and document validation.
+   It also specifies document loading and saving, document views, document formatting, 
+   and key events.
+
++ W3C 
+  - W3C Recommendations
+     Is an Web specifications that describes protocols like
+     (like HTML and XML) and other building blocks of the Web.
+
++ XHTML
+  - Overview
+    easier to process
+    tighter syntax requirements
+    users a syntax standard more like xml
+  - example
+    <br /> 
+  - diferenences
+    all tags must be closed can't just do <p /> 
+    oder of closing tag of nested tag matters
+    all must be lowercase
+    must have <? version="1.0" encodeing="UTF-8"?>
++ Terms
+  Asynchronous - when a request is sent and the client does not have wait for the responce. It can do some other processing
+                 in the background
+
++ REST
+  - What is REST?
+    ** Applying verbs PUT POST GET DELETE to noun resource
+    Every resource has a unquic URL, tranfers data with HTTP does not have appitional messaging layer like  SOAP does
+  - Web Sevice
+     RESTful is a way to implement a Web Service (Web API) that are stateless
+
++ Web Service 
+   - What is Web Service?
+     API or Web API that is accessed via HTTP and executed on a remote system hosting the requested service
+   - Styles
+     RPC - Remote Procedure Calls
+     SOA - Service-Oriented Architecture
+     REST
+
++ Storing state Information
+  - Cookies 
+    Stored on the client
+    useful for if you need to have that data for months 
+    Cookies are sent evertime the page is loaded 
+
+  - Session 
+    Stored on the client but needs a small cookie to store the unquic ID or an ID in the URL
+    Lasts of until the user exits the browser
+    more secure 
+    can be confired to be stored in either a database or flat file

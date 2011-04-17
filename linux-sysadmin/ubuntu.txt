@@ -1,0 +1,8 @@
+
++ Searching and Uninstalling packages
++ ------------------------------------
+ - sudo apt-cache search packagename  
+ - sudo apt-get --purge remove packagename  
+
+ - dpkg -l  # lists all installed packages 
+

@@ -1,0 +1,17 @@
++ Backup pc
++ ------------------------------------------------------------
+
++ Hostname: potter.inside
+
++ Web interface 
+  - http://potter.inside/backuppc
+    username: backuppc
+    password: QyoZcmnF
+
+  - changing the password
+    htpasswd /etc/backuppc/htpasswd backuppc
+
+
++ resources
+  https://help.ubuntu.com/community/BackupPC
+

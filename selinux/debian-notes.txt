@@ -1,0 +1,26 @@
++ Installing selinux on debian lenney
++ -----------------------
+ apt-get install selinux-basics selinux-policy-default
+ apt-get install selinux-policy-src
+ apt-get install libsepol*
+
++ Compiling the policy
++---------------------
+
+ cd /usr/src
+  setenforce 0
+  make conf
+  make policy
+  make install
+  make load
+  make relabel
+  make checklabels
+  make restorelabels
+
++ addind a new user 
++ -------------------
+  semanage login -a -s staff_u setest
+
++ Resources
++ ---------------------------------
+ http://wiki.debian.org/SELinux/Setup

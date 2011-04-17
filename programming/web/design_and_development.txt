@@ -1,0 +1,5 @@
+1. design the page in HTML
+2. write PHP scripts/functionality
+3. style the page with CSS
+4. Write JavaScript when needed
+

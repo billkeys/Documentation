@@ -1,0 +1,56 @@
++ Installing capistrano
++ ------------------------------
+ sudo  apt-get install ruby irb rdoc ri ruby1.8-dev libzlib-ruby libopenssl-ruby rubygems git-core rake
+
+  sudo gem install capistrano
+
++ Initial setup
++ -------------------------------
+  $ export PATH=$PATH:/var/lib/gems/1.8/bin/
+  $ mkdir test
+  $ cd test
+  $ capify .
+  $ vi config/deploy.rb
+  $ cat diskspace
+
+
++ Running a task
++ ----------------------------
+  $ cd myscript
+  $ cat updating
+
++ config/deploy.rb
++ -----------------------------------------
+$ cat config/deploy.rb  
+  # #######################################
+  # SERVER CONFIGURATION
+  set :server_name, "test3.inside"
+  set :user, 'root'
+  ssh_options[:port] = 22
+ 
+  
+  # #######################################
+  # LOCAL CONFIGURATION
+  ssh_options[:keys] = "~/.ssh/id_rsa"
+  #set :default_local_files_path, "/home/"
+   
+    
+  # some Apache default values
+  set :default_server_admin, "root@localhost"
+  set :default_directory_index, "index.html"
+     
+  role :web, server_name
+  role :db, server_name, :primary => true
+  role :servers, "test1.inside"
+
+  desc "Checking disk space"
+  task :diskspace, :roles => :servers do
+      run 'df
+  end
+
+
+
++ Resource
++ ------------------------------------------
+  http://agaric.com/note/setup-ubuntu-development-environment-agaric-way
+  http://suitmymind.github.com/ubuntu-machine

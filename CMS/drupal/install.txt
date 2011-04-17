@@ -1,0 +1,16 @@
+
++ Folder permissions Drupal with Ubuntu
+cd /var/www
+
+# u=rwx,g=rx for security
+sudo chown -R {username}:www-data .
+sudo chmod -R 750 .
+
+# Let apache write to sites/{sitename}/files directories
+find . -type d -wholename "*/sites/*/files" -exec sudo chmod -R 770 {} \;
+
+# Make sure newly-created files retain the www-data group (useful for Drush)
+# You don't want to apply this to files, only directories.  Hence the round-about method
+sudo chmod g+s .
+find . -type d -exec sudo chmod g+s {} \;
+

@@ -1,0 +1,5 @@
++ Usefull powermanagement tools
++ ----------------------------------
+ powertop 
+
+ powernap

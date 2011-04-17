@@ -1,0 +1,30 @@
+
++ Booting up without a graphical interface
++ -----------------------------------------------
+$ su -
+
+# vi /etc/inittab
+
+change to:
+
+id:3:initdefault:
+
+
++ Enable service at boot
++ ---------------------------------------------------
+  # chkconfig kadmin on
+ 
+   or
+  
+  # chkconfig --level 2345 kadmin on
+
+
++ Changing hostname
++ -----------------------------------------------------
+ vi /etc/sysconfig/network
+
++ Chaning login banner
++ -------------------------------------------------------
+  # vi /etc/issue.net
+  # vi /etc/ssh/sshd_config
+

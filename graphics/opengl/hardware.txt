@@ -1,0 +1,4 @@
+
++ display which version of opengl is running on your hardware
+ $glxinfo |grep version
+

@@ -1,0 +1,17 @@
+
+  rwm@ryan:~$ wget -O - http://xen7/
+
+Should trigger:
+
+  alert tcp $EXTERNAL_NET any -> $HTTP_SERVERS $HTTP_PORTS (
+	msg:"WEB-ATTACKS chmod command attempt";
+	flow:to_server,established;
+	content:"/bin/chmod";
+	nocase;
+	classtype:web-application-attack;
+	sid:1336;
+	rev:5;)
+
+in web-attacks.rules, see me when it does.
+
+

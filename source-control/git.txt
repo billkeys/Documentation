@@ -1,0 +1,100 @@
++ Implmentation on server.inside (git.inside)
++ ------------------------------------------
+  - install
+    $ cd /home/git/repository/
+    $ vi /etc/gitweb.conf
+    $ git clone git://git.kernel.org/pub/scm/git/git.git
+    $ cd git
+    $ make GITWEB_PROJECTROOT="/home/git/repos" \
+      bindir=/usr/bin  gitweb/gitweb.cgi
+    $ cd ../
+    $ ln -s git/gitweb/gitweb.css /home/git/repos/gitweb.css
+    $ ln -s git/gitweb/gitweb.cgi /home/git/repos/gitweb.cgi
+
+  - Adding a new repos
+    git.inside
+    $ ~/repos
+    $ git@server1:~/repos
+    $ mkdir demo && cd demo
+    $ git init
+  
+    client
+     $ git clone root@git.inside:/home/git/repos/demo
+     $ touch README
+     $ git add .
+     $ git commit -m "adding README"
+
+  + Clone a repos
+    git clone ssh://git@git.inside//home/git/repos/Documentation
+
++ Convert hg to git 
++ ----------------------------------------------------------
+ $ git clone git://repo.or.cz/fast-export.git
+ $ mkdir new_git_repo
+ $ cd new_git_repo
+ $ git init
+ $ /path/to/hg-fast-export.sh -r /path/to/hg_repo
+ $ git checkout HEAD
+
++ Adding a new repository with Gitweb and gitosis
++ ------------------------------------------------------
+ - Adding a new repos called "test2:
+
+ - Edit /home/git/.gitosis.conf
+  root@server1:/home/git/repositories# cat /home/git/.gitosis.conf 
+  [gitosis]
+ 
+  [group gitosis-admin]
+  writable = gitosis-admin
+  members = yzrider@potter.inside
+
+  [group myteam]
+  members = yzrider@potter.inside
+  writable = test2
+
+  [repo test2]
+  gitweb = yes
+  owner = yzrider
+  description = foo repository
+
+  $ mkdir test2
+  $ cd test2 && git init
+  $ touch test && git add test && git commit -a -m "only a test"
+  $ git remote add origin git@server1.inside:test2.git
+  $ git push origin master:refs/heads/master
+
++ Adding a new user for gitosis
++ ----------------------------------------------------------
+   $ git clone git@YOUR_SERVER_HOSTNAME:gitosis-admin.git
+   $ cd gitosis-admin
+   $ cp ~/alice.pub keydir/
+   $ cp ~/bob.pub keydir/
+   $ git add keydir/alice.pub keydir/bob.pub
+
+   $ cat gitosis.conf 
+   [group myteam]
+   - members = jdoe
+   + members = jdoe alice bob
+    writable = free_monkey
+
+    $ git commit -a -m "Granted Alice and Bob commit rights to FreeMonkey"
+    $ git push
+
++ gitweb
++ ---------------------
+ - To get Gitweb and gitosis  working together I need to change user group
+   # usermod -G www-data,git www-dat
+
++ Resources
++ ----------------------------------------------------------------
+  http://www.kernel.org/pub/software/scm/git/docs/user-manual.html
+  http://markmcb.com/tag/gitweb/
+  http://escapegoat.org/2009/5/20/git-gitweb-gitosis-and-git-daemon-in-harmony-on-debian
+  http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way
+  http://www.mantisbt.org/wiki/doku.php/mantisbt:gitosis_management
+  http://archive.daniel-baumann.ch/debian/documents/cheatpages/gitosis.html
+
++ Books
++ ---------------------------------------------------------------
+  http://progit.org/book/
+

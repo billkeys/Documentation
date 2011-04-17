@@ -1,0 +1,8 @@
++ Test development
++ ----------------
+  - On java1.inside:~/Development
+
++ Resources
++ ----------------
+http://sethbc.org/
+

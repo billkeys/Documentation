@@ -1,0 +1,18 @@
+
+
++ No space left on disk
++ ---------------------------------------
+  check the number of inode used
+  # df -i
+
+
+
++ rm error
++ ---------------------------------------
+
+  # rm spam-*
+  /bin/rm: Argument list too long.
+
+  # find . -name 'spam-*' | xargs rm
+
+

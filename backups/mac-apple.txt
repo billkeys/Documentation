@@ -1,0 +1,9 @@
+
++ Time machine and Samba
++ ----------------------------------
+
+- Current setup
+  - katie machine
+
+http://hupio.wordpress.com/2008/04/27/osx-timemachine-and-sambawindows-share/
+

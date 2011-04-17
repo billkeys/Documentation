@@ -1,0 +1,22 @@
+Goals
+------
+  - To make managing my music collection easier
+  - Central location of all music
+    - Samba share on /Storage/Music
+    - Make sure that Katies music is included
+    - Backup on Katie's extrernal hard drive.
+    - Replace ~/Music with the Music share 
+      - Make sure that it's write accessable
+    - Mount Music on all computers
+  - Verify that Itunes don't need to have uquic configuration options per machine.
+
+
+Mounting samba on a mac
+-----------------------
+ - http://lifehacker.com/software/mac-os-x/how-to-mount-a-windows-shared-folder-on-your-mac-247148.php
+
+
+Some command line music programs
+--------------------------------
+ - http://tux.50webs.org/review_cli_audio_tools.html
+

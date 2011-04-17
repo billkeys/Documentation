@@ -1,0 +1,43 @@
++ SSH Keys
+  $ ssh-keygen -t dsa  -C 'Bill Desktop Key (DSA)'
+  $ ssh-keygen -t rsa1 -C 'Bill Desktop Key (RSA1)'
+
+  Enter a strong passphrase.  This should be a sentance with punctuation.
+
+Now setup ssh-agent
+
++ ssh keys autologin
+   % eval `ssh-agent`
+   % ssh-add <private key file> # e.g. ~/.ssh/id_RSA
+   % ssh-add -l
+
+
++ Using ssh-agent for passwordless login
++ ---------------------------------------
+
+  http://www.securityfocus.com/infocus/1812
+
+
++ ssh with out password
++ ----------------------------------
+
+  - On host
+    ssh-keygen -t rsa
+
+  - on machine connecting to 
+    scp root@template1.inside:~/.ssh/id_rsa.pub  .
+    cat ~/id_rsa.pub | cat >> ~/.ssh/authorized_keys
+
+
++ SSH Cluster
++ ----------------------------------------------------------
+ + Uses
+   Used to ssh into multible machines and enter commands once to all the other machines via ssh
+   May be better then a automated script because it's all or nothing if something breaks
+   Also better if you are not sure able all the sequences of commands needs to be executed 
+   on the all machines
+
+ + Cluster SSH with cSSHx
+   http://eric.lubow.org/2010/system-administration/cluster-ssh-with-csshx/
+   http://code.google.com/p/csshx/
+
