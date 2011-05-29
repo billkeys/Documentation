@@ -6,7 +6,7 @@
 + ---------------------
 
 + Features of Client side JavaScript
-  - Control Document Appearence adn Content
+  - Control Document Appearance and Content
   - Control The browser
   - Interact with HTML Forms
   - Interact with the User - ie with Event Handlers
@@ -16,34 +16,36 @@
   - no reading or writing of file for security reasons
   - no networking support like sockets
 + Other
-  - every iplment ation og JavaScript alwoys have a global object at the head
-    global properties ie fields or varibles
+  - every implement ation og JavaScript always have a global object at the head
+    global properties ie fields or variables
 
 + When to use javascript
   - Event
     click, double clicks, mouse enters mouse exits, key presses
   - Browser access
     window sizing 
-
+ + ECMAScript
+   - core of javascrip that describes the language syntax and basic objects
+  
 + Client Side JavaScript
 + -----------------------------------------------------------
-  + The web Browser Enviroment
+  + The web Browser Environment
     - Features
       1. Window Object - browser window, global object and global execution context
                          Its at the root (window.document. ...) //current window document
       2. DOM and client-side object hierarchy - represent the HTML Document
       3. Event-driven programming model - never use document.write() because it will 
-                                          overide the current document with a new one
+                                          override the current document with a new one
   + Embedding Scripts int HMTL
     1. JavaScript code between <script> </script>
-    2. external file specfied by the srv attribute of <script> tab
-    3. in an event handler as a value of an HMTL attrubure like onclick
+    2. external file specified by the srv attribute of <script> tab
+    3. in an event handler as a value of an HMTL attribute like onclick
    4. In URL javascript: protocol
 
   + Manipulating the Document During Loading
-    - When to do edit the Document with for exampe document.write() is a debate 
+    - When to do edit the Document with for example document.write() is a debate 
       can depend on the browser
-    - Consensus that existing is it's safe to manipuate the document once the 
+    - Consensus that existing is it's safe to manipulate the document once the 
      onload event has been triggered
 
 + Scripting HTTP (ie AJAX)
@@ -61,16 +63,16 @@
          request.open("GET", url, false); // POST or HEAD (gets info about doc) can be used
          request.setRequestHeader(....
          request.send(null);//use null if using GET if POST put what is send to the server
-      3. synchronously or asynchrously retrieving the server's responce  
+      3. synchronously or asynchrously retrieving the server's response  
     
-    - Asynchronous Responce
+    - Asynchronous Response
       request.open(...,true)
-      nottfication of a responce is handled by an event handler
-      event handler propery is onreadystatechange function which is called
+      notification of a response is handled by an event handler
+      event handler property is onreadystatechange function which is called
       when readyState is changed so we need to check readyState for it's value
     - Notes
       there is no standardized XMLHttpRequest Object so each browser does it a 
-      little diffent
+      little different
 
    + HTTP POST
      - Overall
@@ -80,7 +82,7 @@
        HTTP.post();
 
     + Ajaxs and Dynamic Scripting
-      - uses scripted HTTP to communitate with a web server without causing pages
+      - uses scripted HTTP to commentate with a web server without causing pages
         to reload.
       - XML is optional for encoding data
       - hidden data might be better because you don't need make more request to 
@@ -90,8 +92,9 @@
 + ---------------------------------------
  - HTML Document Object Model (DOM) is the browser's view of an HTML page
    as an object hierarchy, starting with the browser window itself and moving
-   deeper into the page, including all of the elements on the page and their attributes
+   deeper into the page, including all of the elements on the page and their attributes. The hierarchy contains nodes.
  
+ - W3C began working on the DOM
       Window
         |
      document
@@ -101,12 +104,30 @@
     textboxes,
     radio buttons, etc
 
- - JavaScript is used to manipulate or get information about objects in the HTML DOM.
+ - JavaScript is used to manipulate or get information about objects in the HTML DOM. However it's not Javascript specifit.
 
-
-+ JavaScript Syntax
++ The Brower Object Model (BOM)
 + ------------------------------------------------------------------
-  1. Statemens end with semi-colons  ;
+  - Allows access and manipulation of the browser window.
+  - Only part javascript implemenation that has no related standard.
+  - Deals with Windows and frames
+  - support for cookies
+  - Some standard like having window object and navigator object but 
+    each browser has it's own properties and methods on thos objects
+  
++ JavaScript Syntax (ECMAScript)
++ ------------------------------------------------------------------
+  + Core
+    - Everything is case-sensitive
+    - Varibles are loosely typed. ie no types
+      var num = 25;
+    - End-of-line semicolons are optional.
+      but some browsers need to have ;
+    - comments are same as java, C and Perl
+    - Braces indicate code blocks
+    
+    
+  1. Statements end with semi-colons  ;
   2. case sensitive
   3. comments
      //
@@ -115,7 +136,7 @@
   4. objects reference using dot notation
      window.document.loginform
      window.document.forms[0]
-  5. objects reference using squar bracket notation
+  5. objects reference using square bracket notation
      window['document']['loginform']
      window['document']['form[0]']
    
@@ -160,9 +181,9 @@
    - Examples
      Location - allows you to download and display the contents of any URL in any
                 window or frame of the browser
-     History  - allows you to move foward and back within the user;s browsing history
-     Window   -  allows JavaScript to display arbitray messages to the user in the 
-                 status line of any brower window 
+     History  - allows you to move forward and back within the user;s browsing history
+     Window   -  allows JavaScript to display arbitrary messages to the user in the 
+                 status line of any browser window 
 
 + Event Handlers
   - Are attributes that force an element to "listen" 
