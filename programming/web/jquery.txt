@@ -6,7 +6,32 @@
 + Into
 + ---------------------------------------
 
-  + Jquery and DOM
++ Why Use JQuery
+  - Uses specfication from W3C before the browswers do.
+  - Cross Browser support by normalizeing differents of browswers
+  - Fully Documented APi with inline code examples.
+  - Small 18KB minified and zipped (114KB uncompressed) 
+  - Helps seperate html and JS 
+        JQuery 
+	 $(document).ready(function() {
+	    $("a").click(function() {
+	       alert("Hello world!");
+            });
+        });
+        JS
+	<a href="" onclick="alert('Hello world')">Link</a>
+
+   - Jquery Philosophy is "Write less, do more.
+     Making code shorter and therefore easier to read and maintain.
+     1. Finding some elements by CSS selectors) and do something with them by using JQuery methods
+        jQuery('div').hide();
+     2. Chaining more then one JQuery method on a set of elements
+        jQuery('div').hide().text('new text').show();
+     3. Using the JQuery wrapper and implicit interation
+        Wrapper - selecting DOM element from HTML page that will be wrapped with JQuery
+                  functionality
+       implicit interation - example jQuery('div') is really interating throw each DOM element
+ + Jquery and DOM
    Almost everything we do when using jQuery reads or manipulates the document object model (DOM), 
    we need to make sure that we start adding events etc. as soon as the DOM is ready.
 
@@ -113,16 +138,4 @@
 
 
 
-+ Why Use JQuery
-+ ------------------------------------------------------------------------------------
-    + Benifieds of JQuery
-       -helps seperate html and JS 
-        JQuery 
-	 $(document).ready(function() {
-	    $("a").click(function() {
-	       alert("Hello world!");
-            });
-        });
-        JS
-	<a href="" onclick="alert('Hello world')">Link</a>
-      - a lot about making code shorter and therefore easier to read and maintain.
+
