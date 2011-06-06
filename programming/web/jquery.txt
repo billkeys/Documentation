@@ -31,6 +31,24 @@
         Wrapper - selecting DOM element from HTML page that will be wrapped with JQuery
                   functionality
        implicit interation - example jQuery('div') is really interating throw each DOM element
+
+   - JQuery's API is organized into logical categories.
+
+     1. jQuery Core  -  jQuery functions, jQuery Object Accessors, Data, Plugins, Interoperability
+     2. Selectors - Basics, Hierachy, Basic Filters, Content Filters, Visility Filters,
+        Attributes Filters, Child Filters, Forms, and Form Filters
+     3. Attributes - Attr, Class, HTML, Text, Value
+     4. Traversing -  Filtering, Finding, Chaining
+     5. Manipulation -  Changing Contents, Inserting Inside, Inserting Outside, 
+        Inserting Around, Replacing,  Removing, and Copying
+     6.  CSS - CSS, Positioning, Height and Widths
+     7. Events - Page Load, Event Handling, Live Events, Interaction Helpers, Event Helpers
+     8. Effects - Basics, Sliding, Fading, Custom, Settings
+     9. Ajax - AJAX Requests, AJAX Events, Misc.
+     10. Utilities - Browser and Feature Detection, Array and Object Operations, 
+         Test Operations, String Operations, Urls
+
+
  + Jquery and DOM
    Almost everything we do when using jQuery reads or manipulates the document object model (DOM), 
    we need to make sure that we start adding events etc. as soon as the DOM is ready.
