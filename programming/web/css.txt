@@ -4,8 +4,28 @@
 
 
 + class vs id
-+ ---------------------------------------
-  + When to use id vs class?
-  Use IDs when there is only one occurence per page. Use classes when there are one or more occurences per page.
+  - When to use id vs class?
+    Use IDs when there is only one occurence per page. 
+    Use classes when there are one or more occurences per page.
 
 
++ CSS Hierarchy
+  - Come into play when handling mulitable sources of css
+  - Defining Styles 
+    1. External - within an external style sheet.
+    2. Internal Within the HTML document <head>.
+    3. Inline - within an element
+     <h2 style="text-align: right;">My Heading</h2>
+  - Precedence
+    External -> Internal -> Inline ie Inline takes precedence since it's closest                                      to the element
+
+    Multiple External Style Sheets
+      - the style sheet closes to the element takes procedences
+        @import "style1.css";
+        @import "style2.css";
+        so style2.css gets applied if it has the applied css       
+  - Forcing precedence
+    h2 { color: #ccc !important; }
+    use !important but IE does not play well so use it sparingly
+
+    
